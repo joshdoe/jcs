@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -58,6 +58,13 @@ public class CoverageGapRemover
 
   public static class Parameters
   {
+      //<<TODO>>This code is duplicated in InternalMatchedSegmentFinder. 
+      //Might want to refactor. [Jon Aquino]
+      public Parameters(){}
+      public Parameters(double distanceTolerance, double angleTolerance) {
+          this.distanceTolerance = distanceTolerance;
+          this.angleTolerance = angleTolerance;
+      }      
     /**
      * The distance tolerance below which segments and vertices are considered to match
      */

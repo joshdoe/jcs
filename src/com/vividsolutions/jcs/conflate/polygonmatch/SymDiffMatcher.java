@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -35,7 +35,6 @@
 package com.vividsolutions.jcs.conflate.polygonmatch;
 
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jump.feature.Feature;
 
 /**
  * Uses symmetric difference as the criterion for determining match scores.
@@ -46,22 +45,18 @@ public class SymDiffMatcher extends IndependentCandidateMatcher {
   }
 
   /**
-   * First the target is aligned with each candidate using the centre of mass
-   * of the outlines. Then the symmetric difference is determined. The score
-   * is a linear function of the symmetric difference: 1 if the shapes perfectly
+   * The score is a linear function of the symmetric difference: 1 if the shapes perfectly
    * overlap; 0 if the shapes do not overlap at all.
    * @param target the feature to match
    * @param candidate the feature to compare with the target
    * @return candidates with a score greater than 0 (typically all the candidates).
    */
-  protected double match(Feature target, Feature candidate) {
-    Geometry targetGeom = (Geometry) target.getGeometry().clone();
-    Geometry candidateGeom = (Geometry) candidate.getGeometry().clone();
+  public double match(Geometry target, Geometry candidate) {
+    Geometry targetGeom = (Geometry) target.clone();
+    Geometry candidateGeom = (Geometry) candidate.clone();
     if (targetGeom.isEmpty() || candidateGeom.isEmpty()) {
       return 0; //avoid div by 0 in centre-of-mass calc [Jon Aquino]
     }
-    MatcherUtil.alignByOutlineCentreOfMass(targetGeom);
-    MatcherUtil.alignByOutlineCentreOfMass(candidateGeom);
     return MatcherUtil.toScoreFromSymDiffArea(
         targetGeom.getArea(), candidateGeom.getArea(),
         targetGeom.symDifference(candidateGeom).getArea());

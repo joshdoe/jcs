@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -48,6 +48,9 @@ import com.vividsolutions.jump.workbench.plugin.*;
 import com.vividsolutions.jump.workbench.ui.*;
 import com.vividsolutions.jump.workbench.ui.renderer.style.*;
 
+/**
+ * @deprecated
+ */
 public class PolygonMatchPlugIn extends AbstractPlugIn implements ThreadedPlugIn {
 
   public PolygonMatchPlugIn() {
@@ -112,7 +115,7 @@ throw new UnsupportedOperationException();
     try {
       layer.getBasicStyle().setLineWidth(2);
       layer.getBasicStyle().setLineColor(color);
-      layer.addStyle(new ArrowTerminalDecorator.NarrowSolidEnd());
+      layer.addStyle(new ArrowLineStringEndpointStyle.NarrowSolidEnd());
       layer.setDrawingLast(true);
     }
     finally {
@@ -136,10 +139,10 @@ throw new UnsupportedOperationException();
 
   private FeatureMatcher featureMatcher(MultiInputDialog dialog) {
     return new ChainMatcher(new FeatureMatcher[] {
-      new WindowMatcher(dialog.getDouble(ENVELOPE_BUFFER)),
+      new WindowFilter(dialog.getDouble(ENVELOPE_BUFFER)),
       new SymDiffMatcher(),
-      new TopScoreMatcher(),
-      new MinScoreMatcher(dialog.getDouble(MINIMUM_SCORE))
+      new TopScoreFilter(),
+      new ThresholdFilter(dialog.getDouble(MINIMUM_SCORE))
     });
   }
 

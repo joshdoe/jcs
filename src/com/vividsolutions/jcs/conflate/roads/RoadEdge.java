@@ -1,5 +1,5 @@
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -41,41 +41,49 @@ import java.util.*;
  */
 public class RoadEdge
     extends Edge
+
 {
 
   private Collection features;
   //private Feature f;
-  private Geometry geom;
+  //private Geometry geom;
   private String name;
   private RoadEdge match = null;
   private double matchDistance = 0.0;
   private RoadNode[] nodes;
   private Matches matchList = new Matches(new RoadEdgeComparator(), true);
   //private boolean isMerged = false;
+  private RoadEdgeFeature featureProxy;
 
   public RoadEdge(Feature f)
   {
     features = new ArrayList();
     features.add(f);
-    geom = f.getGeometry();
+    initFeatureProxy(f.getGeometry());
   }
 
   public RoadEdge(Geometry geom, Feature f)
   {
     features = new ArrayList();
     features.add(f);
-    this.geom = geom;
+    initFeatureProxy(f.getGeometry());
   }
 
   public RoadEdge(Geometry geom, Collection features)
   {
     this.features = features;
-    this.geom = geom;
+    initFeatureProxy(geom);
   }
 
+  private void initFeatureProxy(Geometry geom)
+  {
+    featureProxy = new RoadEdgeFeature(this);
+    featureProxy.setGeometry(geom);
+  }
+  public RoadEdgeFeature getFeatureProxy() { return featureProxy; }
   public Feature getFeature() { return (Feature) features.iterator().next(); }
   public Collection getFeatures() { return features; }
-  public Geometry getGeometry() { return geom; }
+  public Geometry getGeometry() { return featureProxy.getGeometry(); }
   /*
   public boolean isMerged() { return isMerged; }
   public void setMerged(boolean isMerged) { this.isMerged = isMerged; }
@@ -108,7 +116,7 @@ public class RoadEdge
   {
     this.name = name;
   }
-  public boolean hasMatch() { return match != null; }
+  public boolean hasMatch() { return featureProxy.hasMatch(); }
   public RoadEdge getMatch()  {    return match;  }
 
   public void setMutualMatch(RoadEdge matchEdge)
@@ -120,7 +128,9 @@ public class RoadEdge
   public void setMatch(RoadEdge matchEdge)
   {
     match = matchEdge;
+    // perfect match!
     matchDistance = 0.0;
+    featureProxy.setMatched(match != null);
   }
 
   public void setMatch(RoadEdge matchEdge, double matchDistance)
@@ -128,6 +138,7 @@ public class RoadEdge
     if (match == null || matchDistance < this.matchDistance) {
       match = matchEdge;
       this.matchDistance= matchDistance;
+      featureProxy.setMatched(match != null);
     }
   }
   public void addMatch(RoadEdge matchEdge, double matchDistance)
@@ -142,10 +153,11 @@ public class RoadEdge
   {
     match = null;
     matchDistance = Double.NEGATIVE_INFINITY;
+    featureProxy.setMatched(false);
   }
   public String toString()
   {
-    return geom.toString();
+    return featureProxy.getGeometry().toString();
   }
 
   public class RoadEdgeComparator implements Comparator
@@ -155,6 +167,6 @@ public class RoadEdge
       return ((RoadEdge) o1).getGeometry().compareTo(((RoadEdge) o2).getGeometry());
     }
   }
-
-
 }
+
+

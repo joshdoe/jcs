@@ -1,23 +1,23 @@
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * For more information, contact:
  *
  * Vivid Solutions
@@ -95,12 +95,12 @@ public class RoadEdgeMerger {
     for (Iterator i = path.iterator(); i.hasNext(); ) {
       DirectedEdge de = (DirectedEdge) i.next();
       RoadEdge edge = (RoadEdge) de.getEdge();
-      network.graph.remove(edge);
+      network.remove(edge);
     }
 
     List featList = getFeatureList(path);
     //TODO: pass in entire list of features here
     Feature firstFeat = (Feature) featList.get(0);
-    network.graph.addEdge(newLine, firstFeat);
+    network.addEdge(newLine, featList);
   }
 }

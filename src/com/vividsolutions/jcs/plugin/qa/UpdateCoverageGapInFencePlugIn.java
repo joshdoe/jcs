@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -98,6 +98,7 @@ public class UpdateCoverageGapInFencePlugIn
     if (context.getLayerViewPanel().getFence() == null)
       return;
     // we have already checked that there is a fence set
+    //Might want to use an Assert in that case [Jon Aquino]
     Envelope fence = context.getLayerViewPanel().getFence().getEnvelopeInternal();
     // use the size of the fence as the distance tolerance
     // this will produce bad results for very big fences, but the user should be aware of this
@@ -116,7 +117,7 @@ public class UpdateCoverageGapInFencePlugIn
     removeFromLayer(context, CoverageGapPlugIn.GAP_SEGMENT_LAYER_NAME, fence);
     removeFromLayer(context, CoverageGapPlugIn.GAP_SIZE_LAYER_NAME, fence);
 
-    addToLayer(context, CoverageGapPlugIn.GAP_SIZE_LAYER_NAME, segs);
+    addToLayer(context, CoverageGapPlugIn.GAP_SEGMENT_LAYER_NAME, segs);
     addToLayer(context, CoverageGapPlugIn.GAP_SIZE_LAYER_NAME, sizeInd);
 
   }

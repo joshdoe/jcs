@@ -1,5 +1,5 @@
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -33,7 +33,7 @@
 package com.vividsolutions.jcs.precision;
 
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jcs.geom.*;
+import com.vividsolutions.jts.geom.util.*;
 
 /**
  * Reduces the precision of a {@link Geometry}
@@ -57,7 +57,7 @@ public class GeometryPrecisionReducer
   private class PrecisionReducerCoordinateOperation
       extends GeometryEditor.CoordinateOperation
   {
-    public Coordinate[] edit(Coordinate[] coordinates, Geometry geom, GeometryEditor editor)
+    public Coordinate[] edit(Coordinate[] coordinates, Geometry geom)
     {
       for (int i = 0; i < coordinates.length; i++) {
         coordPrecReducer.reducePrecision(coordinates[i]);

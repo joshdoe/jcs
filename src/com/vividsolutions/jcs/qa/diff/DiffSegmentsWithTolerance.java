@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -70,10 +70,10 @@ public class DiffSegmentsWithTolerance {
 
   private void compute(FeatureCollection fc0, FeatureCollection fc1)
   {
-    diffGeom[0] = findUniqueSegmentGeometrys(fc0, fc1);
-    diffGeom[1] = findUniqueSegmentGeometrys(fc1, fc0);
+    diffGeom[0] = findUniqueSegmentGeometries(fc0, fc1);
+    diffGeom[1] = findUniqueSegmentGeometries(fc1, fc0);
   }
-  private List findUniqueSegmentGeometrys(FeatureCollection fc0, FeatureCollection fc1)
+  private List findUniqueSegmentGeometries(FeatureCollection fc0, FeatureCollection fc1)
   {
     List segGeomList = new ArrayList();
     UniqueSegmentsWithToleranceFinder finder = new UniqueSegmentsWithToleranceFinder(fc0, fc1);

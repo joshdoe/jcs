@@ -1,5 +1,5 @@
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -44,33 +44,27 @@ import com.vividsolutions.jump.geom.EnvelopeUtil;
  */
 public class RoadNetwork {
 
-  private FeatureCollection edgesFC;
+  private FeatureCollection linesFC;
+  private FeatureDataset edgesFC = new FeatureDataset(RoadEdgeFeature.schema);
   RoadGraph graph = new RoadGraph();
   private STRtree nodeIndex;
   private STRtree edgeIndex;
 
-  public RoadNetwork(FeatureCollection edgesFC)
+  public RoadNetwork(FeatureCollection linesFC)
   {
-    this.edgesFC = edgesFC;
-    buildGraph(edgesFC);
+    this.linesFC = linesFC;
+    buildGraph(linesFC);
     index();
   }
 
-  public List getUnmatchedEdges()
+  public FeatureCollection getEdgesFC()
   {
-    List unmatchedEdges = new ArrayList();
-    for (Iterator i = graph.edgeIterator(); i.hasNext(); ) {
-      RoadEdge re = (RoadEdge) i.next();
-      if (re.getMatch() == null) {
-        unmatchedEdges.add(re);
-      }
-    }
-    return unmatchedEdges;
+    return edgesFC;
   }
 
-  public FeatureCollection getUnmatchedEdgeFC()
+  public FeatureCollection OLDgetUnmatchedEdgeFC()
   {
-    FeatureDataset unmatchedFC = new FeatureDataset(edgesFC.getFeatureSchema());
+    FeatureDataset unmatchedFC = new FeatureDataset(linesFC.getFeatureSchema());
     for (Iterator i = graph.edgeIterator(); i.hasNext(); ) {
       RoadEdge re = (RoadEdge) i.next();
       if (re.getMatch() == null) {
@@ -90,6 +84,7 @@ public class RoadNetwork {
     for (Iterator i = edges.iterator(); i.hasNext(); ) {
       Feature f = (Feature) i.next();
       RoadEdge edge = graph.addEdge(f);
+      edgesFC.add(edge.getFeatureProxy());
     }
   }
 
@@ -105,6 +100,18 @@ public class RoadNetwork {
   public Iterator edgeIterator() { return graph.edgeIterator(); }
   public List getEdges() { return graph.getEdges(); }
 
+  public void remove(RoadEdge edge)
+  {
+    graph.remove(edge);
+    edgesFC.remove(edge.getFeatureProxy());
+  }
+
+  public RoadEdge addEdge(LineString line, Collection featColl)
+  {
+    RoadEdge edge = graph.addEdge(line, featColl);
+    edgesFC.add(edge.getFeatureProxy());
+    return edge;
+  }
   private void buildNodeIndex(Iterator nodeIterator)
   {
     nodeIndex = new STRtree();

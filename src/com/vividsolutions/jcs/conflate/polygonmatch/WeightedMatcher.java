@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -51,20 +51,15 @@ import com.vividsolutions.jump.feature.FeatureSchema;
 public class WeightedMatcher implements FeatureMatcher {
 
     /**
-     * Creates a WeightedMatcher with no matchers. Be sure to call #add.
-     */
-  public WeightedMatcher() {
-  }
-
-  /**
    * Creates a WeightedMatcher with the given matchers and their weights.
    * @param matchersAndWeights alternates between FeatureMatchers and Doubles
    */
   public WeightedMatcher(Object[] matchersAndWeights) {
     Assert.isTrue(matchersAndWeights.length % 2 == 0);
-    for (int i = 0; i < matchersAndWeights.length; i += 2) {
-      add((FeatureMatcher) matchersAndWeights[i],
-          ((Double) matchersAndWeights[i+1]).doubleValue());
+    for (int i = 0; i < matchersAndWeights.length; i += 2) {       
+      add((FeatureMatcher) matchersAndWeights[i+1],
+          ((Number) matchersAndWeights[i]).doubleValue());
+      //Number rather than Double so parties (e.g. Jython) can pass in Integers. [Jon Aquino]          
     }
   }
 
@@ -74,8 +69,11 @@ public class WeightedMatcher implements FeatureMatcher {
    * @param matcher a matcher to add
    * @param weight the weight given to scores returned by the matcher
    */
-  public void add(FeatureMatcher matcher, double weight) {
+  private void add(FeatureMatcher matcher, double weight) {
     Assert.isTrue(weight >= 0);
+    if (weight == 0) {
+        return;
+    }
     matcherToWeightMap.put(matcher, new Double(weight));
   }
 

@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -35,7 +35,6 @@
 package com.vividsolutions.jcs.algorithm;
 
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.geom.LineSegmentUtil;
 
 /**
  * Computes the Euclidean distance (L2 metric) from a Point to a Geometry.

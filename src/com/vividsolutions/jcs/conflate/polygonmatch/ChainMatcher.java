@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -48,15 +48,9 @@ import com.vividsolutions.jump.feature.FeatureCollection;
  * are lost. However, this behaviour should be acceptable for most situations
  * Typically you use the Chained Matcher to do some initial filtering before
  * the "real" matching. The scores from this initial filtering are usually
- * ignored (they're usually just 1 or 0, as in the case of WindowMatcher).
+ * ignored (they're usually just 1 or 0, as in the case of WindowFilter).
  */
 public class ChainMatcher implements FeatureMatcher {
-
-  /**
-   * Creates a ChainMatcher with 0 matchers. Be sure to call #add.
-   */
-  public ChainMatcher() {
-  }
 
   /**
    * Creates a ChainMatcher composed of the given matchers.
@@ -64,15 +58,9 @@ public class ChainMatcher implements FeatureMatcher {
    */
   public ChainMatcher(FeatureMatcher[] matchers) {
     for (int i = 0; i < matchers.length; i++) {
-      add(matchers[i]);
+      this.matchers.add(matchers[i]);
     }
   }
-
-  /**
-   * Adds a matcher to the end of the chain.
-   * @param matcher another matcher to narrow down the list of candidate features
-   */
-  public void add(FeatureMatcher matcher) { matchers.add(matcher); }
 
   private ArrayList matchers = new ArrayList();
 

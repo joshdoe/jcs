@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -122,11 +122,11 @@ public class RoadMatcherPlugIn extends ThreadedBasePlugIn {
         "Node Matches",
         matchedNodeIndFC);
     LayerStyleUtil.setLinearStyle(lyr2, Color.blue, 2, 0);
-    lyr2.addStyle(new ArrowTerminalDecorator.NarrowSolidEnd());
+    lyr2.addStyle(new ArrowLineStringEndpointStyle.NarrowSolidEnd());
     lyr2.fireAppearanceChanged();
     lyr2.setDescription("Node Matches for " + subLyr.getName());
 
-    FeatureCollection unmatchedRefFC = roadMatcher.getNetwork(0).getUnmatchedEdgeFC();
+    FeatureCollection unmatchedRefFC = roadMatcher.getNetwork(0).getEdgesFC();
     Layer lyr3 = context.addLayer(
         StandardCategoryNames.QA,
         "Unmatched Ref",
@@ -134,7 +134,7 @@ public class RoadMatcherPlugIn extends ThreadedBasePlugIn {
     LayerStyleUtil.setLinearStyle(lyr3, Color.green, 4, 0);
     lyr3.setDescription("Unmatched Reference Edges");
 
-    FeatureCollection unmatchedSubFC = roadMatcher.getNetwork(1).getUnmatchedEdgeFC();
+    FeatureCollection unmatchedSubFC = roadMatcher.getNetwork(1).getEdgesFC();
     Layer lyr4 = context.addLayer(
         StandardCategoryNames.QA,
         "Unmatched Sub",
