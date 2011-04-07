@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -54,12 +54,15 @@ public class RoadMatcher {
   //private static final EdgeMatchIndFactory edgeMatchIndFact = new EdgeMatchIndFactory();
 
   private TaskMonitor monitor;
+  private FeatureCollection[] inputFC = new FeatureCollection[2];
   private RoadNetwork[] network = new RoadNetwork[2];
   private RoadMatches edgeMatches = new RoadMatches();
 
   public RoadMatcher(FeatureCollection ref, FeatureCollection subject, TaskMonitor monitor)
   {
     this.monitor = monitor;
+    inputFC[0] = ref;
+    inputFC[1] = subject;
     network[0] = new RoadNetwork(ref);
     network[1] = new RoadNetwork(subject);
   }
@@ -187,13 +190,15 @@ public class RoadMatcher {
     for (Iterator i = network[1].edgeIterator(); i.hasNext(); )
     {
       RoadEdge edge = (RoadEdge) i.next();
-      RoadEdge match = edge.getMatch();
-      if (match != null) {
-        edgeMatches.add(new RoadEdgeMatch(edge, match));
+      RoadEdge matchEdge = edge.getMatch();
+      if (matchEdge != null) {
+        // order is important here - <ref, sub>
+        edgeMatches.add(new RoadEdgeMatch(matchEdge, edge));
       }
     }
   }
-  public FeatureCollection getEdgeMatchIndicators()
+
+  public RoadMatches getEdgeMatchIndicators()
   {
     return edgeMatches;
   }
@@ -328,6 +333,13 @@ public class RoadMatcher {
     }
     return matchIndFC;
     //return FeatureDatasetFactory.createFromGeometryWithLength(matchInd, "length");
+  }
+
+  public FeatureCollection getEdgeMatchReportFC()
+  {
+    EdgeMatchReportBuilder reportBuilder
+        = new EdgeMatchReportBuilder(inputFC[0], inputFC[1], edgeMatches);
+    return reportBuilder.createReportFC();
   }
 /*
   private void matchClosestNodes(RoadNetwork network1, RoadNetwork network2)

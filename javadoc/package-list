@@ -13,7 +13,9 @@ com.vividsolutions.jcs.geom
 com.vividsolutions.jcs.graph
 com.vividsolutions.jcs.plugin
 com.vividsolutions.jcs.plugin.clean
+com.vividsolutions.jcs.plugin.clean.coveragecleaningtoolbox
 com.vividsolutions.jcs.plugin.conflate
+com.vividsolutions.jcs.plugin.conflate.polygonmatch
 com.vividsolutions.jcs.plugin.conflate.roads
 com.vividsolutions.jcs.plugin.qa
 com.vividsolutions.jcs.plugin.test

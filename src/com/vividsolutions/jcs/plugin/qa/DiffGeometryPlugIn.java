@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -39,7 +39,7 @@ import java.awt.*;
 import javax.swing.JComboBox;
 
 import com.vividsolutions.jcs.qa.diff.*;
-import com.vividsolutions.jcs.util.ColorUtil;
+import com.vividsolutions.jump.util.ColorUtil;
 import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jump.task.*;
 import com.vividsolutions.jump.workbench.model.*;
@@ -53,7 +53,7 @@ public class DiffGeometryPlugIn extends ThreadedBasePlugIn {
   private final static String EXACT_COORD_ORDER = "Test for identical start point and orientation";
   private final static String USE_TOLERANCE = "Match using Distance Tolerance";
   private final static String DISTANCE_TOL = "Distance Tolerance";
-  private final static String SPLIT_COMPONENTS = "Match components of MultiGeometrys";
+  private final static String SPLIT_COMPONENTS = "Match components of MultiGeometries";
 
   private Layer layer1, layer2;
   private boolean useTolerance = false;
@@ -192,9 +192,9 @@ public class DiffGeometryPlugIn extends ThreadedBasePlugIn {
     context.getOutputFrame().addText(" ");
 
     context.getOutputFrame().addField(
-        "# Unmatched Geometrys in Layer 1: ", "" + diffFC[0].size());
+        "# Unmatched Geometries in Layer 1: ", "" + diffFC[0].size());
     context.getOutputFrame().addField(
-        "# Unmatched Geometrys in Layer 2: ", "" + diffFC[1].size());
+        "# Unmatched Geometries in Layer 2: ", "" + diffFC[1].size());
     context.getOutputFrame().addField(
         "# Unmatched Segments in Diff Geometries in Layer 1: ", "" + diffSegFC[0].size());
     context.getOutputFrame().addField(
@@ -203,7 +203,7 @@ public class DiffGeometryPlugIn extends ThreadedBasePlugIn {
 
   private void setDialogValues(MultiInputDialog dialog, PlugInContext context) {
     //dialog.setSideBarImage(new ImageIcon(getClass().getResource("DiffSegments.png")));
-    dialog.setSideBarDescription("Finds geometrys which occur in Layer 1 or Layer 2 but not both."
+    dialog.setSideBarDescription("Finds geometries which occur in Layer 1 or Layer 2 but not both."
                                  + "  Matching can be either exact or within a Distance Tolerance."
                                  );
     String fieldName = LAYER1;
@@ -212,12 +212,12 @@ public class DiffGeometryPlugIn extends ThreadedBasePlugIn {
     dialog.addLayerComboBox(LAYER1, context.getLayerManager().getLayer(0), context.getLayerManager());
     dialog.addLayerComboBox(LAYER2, context.getLayerManager().getLayer(1), context.getLayerManager());
     dialog.addCheckBox(USE_TOLERANCE, useTolerance,
-                       "Match geometrys if all points are within a Distance Tolerance of the other Geometry");
-    dialog.addDoubleField(DISTANCE_TOL, distanceTolerance, 8, "Specifies how close geometrys must be to match");
+                       "Match geometries if all points are within a Distance Tolerance of the other Geometry");
+    dialog.addDoubleField(DISTANCE_TOL, distanceTolerance, 8, "Specifies how close geometries must be to match");
     dialog.addCheckBox(SPLIT_COMPONENTS, splitIntoComponents,
-                       "Match individual components of MultiGeometrys");
+                       "Match individual components of MultiGeometries");
     dialog.addCheckBox(EXACT_COORD_ORDER, false,
-                       "Requires coordinate lists in matching geometrys to have identical start points and ring orientation");
+                       "Requires coordinate lists in matching geometries to have identical start points and ring orientation");
   }
 
   private void getDialogValues(MultiInputDialog dialog) {

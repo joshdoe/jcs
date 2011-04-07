@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -34,6 +34,7 @@
 
 package com.vividsolutions.jcs.conflate.polygonmatch;
 
+import java.util.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +42,7 @@ import java.util.Map;
 
 import com.vividsolutions.jts.util.Assert;
 import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.Feature;
+import com.vividsolutions.jump.feature.FeatureCollection;
 import com.vividsolutions.jump.feature.FeatureDataset;
 import com.vividsolutions.jump.feature.FeatureSchema;
 import com.vividsolutions.jump.feature.IndexedFeatureCollection;
@@ -53,56 +54,73 @@ import com.vividsolutions.jump.task.TaskMonitor;
  */
 public class AreaFilterFCMatchFinder implements FCMatchFinder {
 
-  private FCMatchFinder matchFinder;
-  private double minArea;
-  private double maxArea;
+    private FCMatchFinder matchFinder;
+    private double minArea;
+    private double maxArea;
 
-  public AreaFilterFCMatchFinder(double minArea, double maxArea, FCMatchFinder matchFinder) {
-    Assert.isTrue(minArea < maxArea);
-    this.minArea = minArea;
-    this.maxArea = maxArea;
-    this.matchFinder = matchFinder;
-  }
-
-  public Map match(IndexedFeatureCollection targetFC, IndexedFeatureCollection candidateFC,
-                   TaskMonitor monitor) {
-    monitor.allowCancellationRequests();
-    Map filteredTargetToMatchesMap = matchFinder.match(
-        filter(targetFC, "targets", monitor),
-        filter(candidateFC, "candidates", monitor), monitor);
-    Map targetToMatchesMap = blankTargetToMatchesMap(targetFC.getFeatures(), candidateFC.getFeatureSchema());
-    targetToMatchesMap.putAll(filteredTargetToMatchesMap);
-    return targetToMatchesMap;
-  }
-
-  private IndexedFeatureCollection filter(IndexedFeatureCollection fc,
-      String name, TaskMonitor monitor) {
-    monitor.report("Filtering " + name + " by area");
-    int featuresProcessed = 0;
-    int totalFeatures = fc.size();
-    FeatureDataset filteredFC = new FeatureDataset(fc.getFeatureSchema());
-    for (Iterator i = fc.iterator(); i.hasNext() && ! monitor.isCancelRequested(); ) {
-      Feature feature = (Feature) i.next();
-      featuresProcessed++;
-      monitor.report(featuresProcessed, totalFeatures, "features");
-      if (! satisfiesAreaCriterion(feature)) { continue; }
-      filteredFC.add(feature);
+    public AreaFilterFCMatchFinder(
+        double minArea,
+        double maxArea,
+        FCMatchFinder matchFinder) {
+        Assert.isTrue(minArea < maxArea);
+        this.minArea = minArea;
+        this.maxArea = maxArea;
+        this.matchFinder = matchFinder;
     }
-    return new IndexedFeatureCollection(filteredFC);
-  }
 
-  private boolean satisfiesAreaCriterion(Feature feature) {
-    double area = feature.getGeometry().getArea();
-    return minArea <= area && area <= maxArea;
-  }
-
-  private Map blankTargetToMatchesMap(List targets, FeatureSchema matchesSchema) {
-    Map blankTargetToMatchesMap = new HashMap();
-    for (Iterator i = targets.iterator(); i.hasNext(); ) {
-      Feature target = (Feature) i.next();
-      blankTargetToMatchesMap.put(target, new Matches(matchesSchema));
+    public Map match(
+        FeatureCollection targetFC,
+        FeatureCollection candidateFC,
+        TaskMonitor monitor) {
+        monitor.allowCancellationRequests();
+        Map filteredTargetToMatchesMap =
+            matchFinder.match(
+                filter(targetFC, "targets", monitor),
+                filter(candidateFC, "candidates", monitor),
+                monitor);
+        //      Put back the targets that were filtered out (albeit with no matches). [Jon Aquino]
+        Map targetToMatchesMap =
+            blankTargetToMatchesMap(
+                targetFC.getFeatures(),
+                candidateFC.getFeatureSchema());
+        targetToMatchesMap.putAll(filteredTargetToMatchesMap);
+        return targetToMatchesMap;
     }
-    return blankTargetToMatchesMap;
-  }
+
+    private IndexedFeatureCollection filter(
+        FeatureCollection fc,
+        String name,
+        TaskMonitor monitor) {
+        monitor.report("Filtering " + name + " by area");
+        int featuresProcessed = 0;
+        int totalFeatures = fc.size();
+        FeatureDataset filteredFC = new FeatureDataset(fc.getFeatureSchema());
+        for (Iterator i = fc.iterator(); i.hasNext() && !monitor.isCancelRequested();) {
+            Feature feature = (Feature) i.next();
+            featuresProcessed++;
+            monitor.report(featuresProcessed, totalFeatures, "features");
+            if (!satisfiesAreaCriterion(feature)) {
+                continue;
+            }
+            filteredFC.add(feature);
+        }
+        return new IndexedFeatureCollection(filteredFC);
+    }
+
+    private boolean satisfiesAreaCriterion(Feature feature) {
+        double area = feature.getGeometry().getArea();
+        return minArea <= area && area <= maxArea;
+    }
+
+    public static Map blankTargetToMatchesMap(
+        Collection targets,
+        FeatureSchema matchesSchema) {
+        Map blankTargetToMatchesMap = new HashMap();
+        for (Iterator i = targets.iterator(); i.hasNext();) {
+            Feature target = (Feature) i.next();
+            blankTargetToMatchesMap.put(target, new Matches(matchesSchema));
+        }
+        return blankTargetToMatchesMap;
+    }
 
 }

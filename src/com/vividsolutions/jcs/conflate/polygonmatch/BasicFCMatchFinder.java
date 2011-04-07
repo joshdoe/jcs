@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.IndexedFeatureCollection;
+import com.vividsolutions.jump.feature.FeatureCollection;
 import com.vividsolutions.jump.task.TaskMonitor;
 
 /**
@@ -47,29 +47,33 @@ import com.vividsolutions.jump.task.TaskMonitor;
  */
 public class BasicFCMatchFinder implements FCMatchFinder {
 
-  /**
-   * Creates a FeatureCollectionMatcher that uses the given FeatureMatcher.
-   * @param matcher typically a composite of other FeatureMatchers
-   */
-  public BasicFCMatchFinder(FeatureMatcher matcher) {
-    this.matcher = matcher;
-  }
-
-  private FeatureMatcher matcher;
-
-  public Map match(IndexedFeatureCollection targetFC, IndexedFeatureCollection candidateFC,
-                   TaskMonitor monitor) {
-    monitor.allowCancellationRequests();
-    monitor.report("Finding matches");
-    TreeMap map = new TreeMap();
-    int featuresProcessed = 0;
-    int totalFeatures = targetFC.size();
-    for (Iterator i = targetFC.iterator(); i.hasNext() && ! monitor.isCancelRequested(); ) {
-      Feature subjectFeature = (Feature) i.next();
-      featuresProcessed++;
-      monitor.report(featuresProcessed, totalFeatures, "features");
-      map.put(subjectFeature, matcher.match(subjectFeature, candidateFC));
+    /**
+     * Creates a FeatureCollectionMatcher that uses the given FeatureMatcher.
+     * @param matcher typically a composite of other FeatureMatchers
+     */
+    public BasicFCMatchFinder(FeatureMatcher matcher) {
+        this.matcher = matcher;
     }
-    return map;
-  }
+
+    private FeatureMatcher matcher;
+
+    public Map match(
+        FeatureCollection targetFC,
+        FeatureCollection candidateFC,
+        TaskMonitor monitor) {
+        monitor.allowCancellationRequests();
+        monitor.report("Finding matches");
+        TreeMap map = new TreeMap();
+        int featuresProcessed = 0;
+        int totalFeatures = targetFC.size();
+        for (Iterator i = targetFC.iterator();
+            i.hasNext() && !monitor.isCancelRequested();
+            ) {
+            Feature subjectFeature = (Feature) i.next();
+            featuresProcessed++;
+            monitor.report(featuresProcessed, totalFeatures, "features");
+            map.put(subjectFeature, matcher.match(subjectFeature, candidateFC));
+        }
+        return map;
+    }
 }

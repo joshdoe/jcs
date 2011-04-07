@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -128,7 +128,7 @@ public class ShortSegmentRemoverPlugIn
   }
 
   private void setDialogValues(MultiInputDialog dialog, PlugInContext context) {
-    dialog.setSideBarDescription("Removes all segments from geometrys "
+    dialog.setSideBarDescription("Removes all segments from geometries "
         + "which are shorter than a minimum length "
         + "and whose removal does not displace neighbouring segments too much. "
         + "[Currently only removes isolated segments.]"

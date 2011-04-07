@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -61,6 +61,10 @@ import com.vividsolutions.jts.util.Debug;
  */
 public class InternalMatchedSegmentFinder {
 
+public Parameters getParam() {
+    return param;
+}
+
   public static List createIndicatorList(LineSegment fs0, LineSegment fs1)
   {
     // this prevents creating duplicate indicators
@@ -115,6 +119,11 @@ public class InternalMatchedSegmentFinder {
 
   public static class Parameters
   {
+    public Parameters(){}
+    public Parameters(double distanceTolerance, double angleTolerance) {
+        this.distanceTolerance = distanceTolerance;
+        this.angleTolerance = angleTolerance;
+    }
     /**
      * The distance below which segments are considered to match
      */
@@ -198,7 +207,7 @@ public class InternalMatchedSegmentFinder {
     return matchedFeatures;
   }
 
-  private void computeMatches()
+  public void computeMatches()
   {
     if (matchedLinesFC != null) {
       return;

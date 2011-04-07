@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -141,7 +141,7 @@ public class PrecisionReducerPlugIn
 
   /**
    * @return an array of two Lists.
-   * The first contains the geometrys which reduced to invalid geometries.
+   * The first contains the geometries which reduced to invalid geometries.
    * The second contains the invalid geometries created
    */
   private List[] reducePrecision(FeatureCollection fc, TaskMonitor monitor)

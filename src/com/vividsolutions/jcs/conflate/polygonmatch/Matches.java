@@ -1,7 +1,7 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
@@ -42,7 +42,6 @@ import java.util.List;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.util.Assert;
 import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.Feature;
 import com.vividsolutions.jump.feature.FeatureCollection;
 import com.vividsolutions.jump.feature.FeatureDataset;
 import com.vividsolutions.jump.feature.FeatureSchema;
@@ -51,159 +50,180 @@ import com.vividsolutions.jump.feature.FeatureSchema;
  * A FeatureCollection that stores the "score" of each Feature.  The score is
  * a number between 0.0 and 1.0 that indicates the confidence of a match.
  */
-public class Matches implements FeatureCollection {
+public class Matches implements FeatureCollection, Cloneable {
 
-  /**
-   * Creates a Matches object.
-   * @param schema metadata applicable to the features that will be stored in
-   * this Matches object
-   */
-  public Matches(FeatureSchema schema) {
-    dataset = new FeatureDataset(schema);
-  }
-
-  /**
-   * Creates a Matches object, initialized with the given Feature's.
-   * @param schema metadata applicable to the features that will be stored in
-   * this Matches object
-   * @param features added to the Matches, each with the max score (1.0)
-   */
-  public Matches(FeatureSchema schema, List features) {
-    this(schema);
-    for (Iterator i = features.iterator(); i.hasNext(); ) {
-      Feature match = (Feature) i.next();
-      add(match, 1);
+    /**
+     * Creates a Matches object.
+     * @param schema metadata applicable to the features that will be stored in
+     * this Matches object
+     */
+    public Matches(FeatureSchema schema) {
+        dataset = new FeatureDataset(schema);
     }
-  }
 
-  private FeatureDataset dataset;
-  private ArrayList scores = new ArrayList();
-
-  /**
-   * This method is not supported, because added features need to be associated
-   * with a score. Use #add(Feature, double) instead.
-   * @param feature a feature to add as a match
-   * @see #add(Feature, double)
-   */
-  public void add(Feature feature) {
-    throw new UnsupportedOperationException("Use #add(feature, score) instead");
-  }
-
-
-  /**
-   * This method is not supported, because added features need to be associated
-   * with a score. Use #add(Feature, double) instead.
-   */
-  public void addAll(Collection features) {
-    throw new UnsupportedOperationException("Use #add(feature, score) instead");
-  }
-
-  /**
-   * This method is not supported, because added features need to be associated
-   * with a score. Use #add(Feature, double) instead.
-   * @param feature a feature to add as a match
-   * @see #add(Feature, double)
-   */
-  public void add(int index, Feature feature) {
-    throw new UnsupportedOperationException("Use #add(feature, score) instead");
-  }
-
-  /**
-   * This method is not supported, because Matches should not normally need to
-   * have matches removed.
-   */
-  public Collection remove(Envelope envelope) {
-    //If we decide to implement this, remember to remove the corresponding
-    //score. [Jon Aquino]
-    throw new UnsupportedOperationException();
-  }
-
-  /**
-   * This method is not supported, because Matches should not normally need to
-   * have matches removed.
-   */
-  public void clear() {
-    //If we decide to implement this, remember to remove the corresponding
-    //score. [Jon Aquino]
-    throw new UnsupportedOperationException();
-  }
-
-  /**
-   * This method is not supported, because Matches should not normally need to
-   * have matches removed.
-   */
-  public void removeAll(Collection features) {
-    //If we decide to implement this, remember to remove the corresponding
-    //score. [Jon Aquino]
-    throw new UnsupportedOperationException();
-  }
-
-  /**
-   * This method is not supported, because Matches should not normally need to
-   * have matches removed.
-   * @param feature a feature to remove
-   */
-  public void remove(Feature feature) {
-    //If we decide to implement this, remember to remove the corresponding
-    //score. [Jon Aquino]
-    throw new UnsupportedOperationException();
-  }
-  /**
-   * Adds a match. Features with zero-scores are ignored.
-   * @param feature a feature to add as a match
-   * @param score the confidence of the match, ranging from 0 to 1
-   */
-  public void add(Feature feature, double score) {
-    Assert.isTrue(0 <= score && score <= 1, "Score = " + score);
-    if (score == 0) { return; }
-    scores.add(new Double(score));
-    dataset.add(feature);
-    if (score > topScore) {
-      topScore = score;
-      topMatch = feature;
+    protected Object clone() {
+        Matches clone = new Matches(dataset.getFeatureSchema());
+        for (int i = 0; i < size(); i++) {
+            clone.add(getFeature(i), getScore(i));
+        }
+        return clone;
     }
-  }
 
-  private Feature topMatch;
-  private double topScore = -1;
+    /**
+     * Creates a Matches object, initialized with the given Feature's.
+     * @param schema metadata applicable to the features that will be stored in
+     * this Matches object
+     * @param features added to the Matches, each with the max score (1.0)
+     */
+    public Matches(FeatureSchema schema, List features) {
+        this(schema);
+        for (Iterator i = features.iterator(); i.hasNext();) {
+            Feature match = (Feature) i.next();
+            add(match, 1);
+        }
+    }
 
-  public double getTopScore() { return topScore; }
+    private FeatureDataset dataset;
+    private ArrayList scores = new ArrayList();
 
-  /**
-   * @return the feature with the highest score
-   */
-  public Feature getTopMatch() { return topMatch; }
+    /**
+     * This method is not supported, because added features need to be associated
+     * with a score. Use #add(Feature, double) instead.
+     * @param feature a feature to add as a match
+     * @see #add(Feature, double)
+     */
+    public void add(Feature feature) {
+        throw new UnsupportedOperationException("Use #add(feature, score) instead");
+    }
 
-  /**
-   * Returns the score of the ith feature
-   * @param i 0, 1, 2, ...
-   * @return the confidence of the ith match
-   */
-  public double getScore(int i) {
-    return ((Double)scores.get(i)).doubleValue();
-  }
+    /**
+     * This method is not supported, because added features need to be associated
+     * with a score. Use #add(Feature, double) instead.
+     */
+    public void addAll(Collection features) {
+        throw new UnsupportedOperationException("Use #add(feature, score) instead");
+    }
 
+    /**
+     * This method is not supported, because added features need to be associated
+     * with a score. Use #add(Feature, double) instead.
+     * @param feature a feature to add as a match
+     * @see #add(Feature, double)
+     */
+    public void add(int index, Feature feature) {
+        throw new UnsupportedOperationException("Use #add(feature, score) instead");
+    }
 
-  public FeatureSchema getFeatureSchema() { return dataset.getFeatureSchema(); }
+    /**
+     * This method is not supported, because Matches should not normally need to
+     * have matches removed.
+     */
+    public Collection remove(Envelope envelope) {
+        //If we decide to implement this, remember to remove the corresponding
+        //score. [Jon Aquino]
+        throw new UnsupportedOperationException();
+    }
 
+    /**
+     * This method is not supported, because Matches should not normally need to
+     * have matches removed.
+     */
+    public void clear() {
+        //If we decide to implement this, remember to remove the corresponding
+        //score. [Jon Aquino]
+        throw new UnsupportedOperationException();
+    }
 
-  public Envelope getEnvelope() { return dataset.getEnvelope(); }
+    /**
+     * This method is not supported, because Matches should not normally need to
+     * have matches removed.
+     */
+    public void removeAll(Collection features) {
+        //If we decide to implement this, remember to remove the corresponding
+        //score. [Jon Aquino]
+        throw new UnsupportedOperationException();
+    }
 
+    /**
+     * This method is not supported, because Matches should not normally need to
+     * have matches removed.
+     * @param feature a feature to remove
+     */
+    public void remove(Feature feature) {
+        //If we decide to implement this, remember to remove the corresponding
+        //score. [Jon Aquino]
+        throw new UnsupportedOperationException();
+    }
+    /**
+     * Adds a match. Features with zero-scores are ignored.
+     * @param feature a feature to add as a match
+     * @param score the confidence of the match, ranging from 0 to 1
+     */
+    public void add(Feature feature, double score) {
+        Assert.isTrue(0 <= score && score <= 1, "Score = " + score);
+        if (score == 0) {
+            return;
+        }
+        scores.add(new Double(score));
+        dataset.add(feature);
+        if (score > topScore) {
+            topScore = score;
+            topMatch = feature;
+        }
+    }
 
-  public int size() { return dataset.size(); }
+    private Feature topMatch;
+    private double topScore = 0;
 
+    public double getTopScore() {
+        return topScore;
+    }
 
-  public boolean isEmpty() { return dataset.isEmpty(); }
+    /**
+     * @return the feature with the highest score
+     */
+    public Feature getTopMatch() {
+        return topMatch;
+    }
 
+    /**
+     * Returns the score of the ith feature
+     * @param i 0, 1, 2, ...
+     * @return the confidence of the ith match
+     */
+    public double getScore(int i) {
+        return ((Double) scores.get(i)).doubleValue();
+    }
 
-  public Feature getFeature(int index) { return dataset.getFeature(index); }
+    public FeatureSchema getFeatureSchema() {
+        return dataset.getFeatureSchema();
+    }
 
+    public Envelope getEnvelope() {
+        return dataset.getEnvelope();
+    }
 
-  public List getFeatures() { return dataset.getFeatures(); }
+    public int size() {
+        return dataset.size();
+    }
 
+    public boolean isEmpty() {
+        return dataset.isEmpty();
+    }
 
-  public Iterator iterator() { return dataset.iterator(); }
+    public Feature getFeature(int index) {
+        return dataset.getFeature(index);
+    }
 
+    public List getFeatures() {
+        return dataset.getFeatures();
+    }
 
-  public List query(Envelope envelope) { return dataset.query(envelope); }
+    public Iterator iterator() {
+        return dataset.iterator();
+    }
+
+    public List query(Envelope envelope) {
+        return dataset.query(envelope);
+    }
 }

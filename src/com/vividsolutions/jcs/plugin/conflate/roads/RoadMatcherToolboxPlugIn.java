@@ -37,6 +37,7 @@ import com.vividsolutions.jump.workbench.plugin.*;
 import com.vividsolutions.jump.workbench.ui.GUIUtil;
 import com.vividsolutions.jump.workbench.ui.cursortool.editing.*;
 import com.vividsolutions.jump.workbench.ui.toolbox.*;
+import com.vividsolutions.jump.workbench.ui.cursortool.SelectFeaturesTool;
 
 public class RoadMatcherToolboxPlugIn
     extends ToolboxPlugIn
@@ -58,8 +59,8 @@ public class RoadMatcherToolboxPlugIn
 
     toolbox.getCenterPanel().add(toolboxPanel, BorderLayout.CENTER);
 
-    // don't add any tools for now
-    //toolbox.add(new SnapVerticesToSelectedVertexTool(checkFactory));
+    // add basic selection tool, since it is currently the main tool used
+    toolbox.add(new SelectFeaturesTool());
 
     // Set y so it is positioned below Editing toolbox. [Jon Aquino]
     toolbox.setInitialLocation(new GUIUtil.Location(20, true, 20, false));

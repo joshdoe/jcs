@@ -1,25 +1,25 @@
 
 
 /*
- * The Java Conflation Suite (JCS) is a library of Java classes that
+ * The JCS Conflation Suite (JCS) is a library of Java classes that
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * For more information, contact:
  *
  * Vivid Solutions
@@ -49,6 +49,7 @@ import com.vividsolutions.jump.workbench.ui.plugin.*;
 import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jts.util.*;
 import com.vividsolutions.jts.geom.*;
+import com.vividsolutions.jts.geom.util.LinearComponentExtracter;
 import com.vividsolutions.jump.task.*;
 import com.vividsolutions.jump.workbench.ui.*;
 
@@ -57,15 +58,19 @@ public class PolygonizerPlugIn
 {
 
   private final static String LAYER = "Layer";
+  private final static String NODE_INPUT = "Node input before polygonizing";
   private final static String SPLIT_LINESTRINGS = "Split linestrings into segments";
 
   private MultiInputDialog dialog;
   private String layerName;
   private boolean splitLineStrings = false;
+  private boolean nodeInputLines = false;
   private int inputEdgeCount = 0;
   private int dangleCount = 0;
   private int cutCount = 0;
   private int invalidRingCount = 0;
+
+  private GeometryFactory fact = new GeometryFactory();
 
   public PolygonizerPlugIn() { }
 
@@ -105,20 +110,48 @@ public class PolygonizerPlugIn
     monitor.report("Polygonizing...");
 
     Layer layer = dialog.getLayer(LAYER);
-    FeatureCollection lineFC = layer.getFeatureCollectionWrapper();
-    inputEdgeCount = lineFC.size();
+    FeatureCollection inputFC = layer.getFeatureCollectionWrapper();
+    inputEdgeCount = inputFC.size();
 
-    for (Iterator i = lineFC.iterator(); i.hasNext(); ) {
-      Feature f = (Feature) i.next();
-      Geometry g = f.getGeometry();
-      if (g.getDimension() == 1) {
-        polygonizer.add(g);
-      }
+    Collection lines = getLines(inputFC);
+
+    Collection nodedLines = lines;
+    if (nodeInputLines) {
+      monitor.report("Noding input lines");
+      nodedLines = nodeLines((List) lines);
+    }
+
+    for (Iterator i = nodedLines.iterator(); i.hasNext(); ) {
+      Geometry g = (Geometry) i.next();
+      polygonizer.add(g);
     }
     polygonizer.polygonize(monitor);
 
     if (monitor.isCancelRequested()) return;
     createLayers(context, polygonizer);
+  }
+
+  private Collection getLines(FeatureCollection inputFC)
+  {
+    List linesList = new ArrayList();
+    LinearComponentExtracter lineFilter = new LinearComponentExtracter(linesList);
+    for (Iterator i = inputFC.iterator(); i.hasNext(); ) {
+      Feature f = (Feature) i.next();
+      Geometry g = f.getGeometry();
+      g.apply(lineFilter);
+    }
+    return linesList;
+  }
+
+  private Collection nodeLines(List lines)
+  {
+
+    Geometry linesGeom = fact.createMultiLineString(fact.toLineStringArray(lines));
+    Geometry empty = fact.createMultiLineString(null);
+    Geometry noded = linesGeom.union(empty);
+    List nodedList = new ArrayList();
+    nodedList.add(noded);
+    return nodedList;
   }
 
   private void createLayers(PlugInContext context, Polygonizer polygonizer)
@@ -194,18 +227,21 @@ public class PolygonizerPlugIn
   private void setDialogValues(MultiInputDialog dialog, PlugInContext context) {
     dialog.setSideBarImage(new ImageIcon(getClass().getResource("Polygonize.png")));
     dialog.setSideBarDescription("Polygonizes the line segments in a layer. "
-                                + "The line segments are assumed to be noded correctly. "
-                                + "Dangles and Cutlines are identified."
+                                 + "Polygonization requires correctly noded data. "
+                                 + "If desired the input data may be noded before polygonizing is performed. "
+                                 + "Dangles, Cutlines and Invalid Rings are identified."
     );
     String fieldName = LAYER;
     JComboBox addLayerComboBox = dialog.addLayerComboBox(fieldName, context.getCandidateLayer(0), null, context.getLayerManager());
-    dialog.addCheckBox(SPLIT_LINESTRINGS, false, "If lines are noded at vertices rather than endpoints "
-       + "this options allows input linestrings to be split into separate segments.");
+    dialog.addCheckBox(NODE_INPUT, nodeInputLines, "Node input before polygonizing.");
+    dialog.addCheckBox(SPLIT_LINESTRINGS, splitLineStrings, "If lines are noded at vertices rather than endpoints "
+       + "this options allows input linestrings to be split into separate line segments.");
   }
 
   private void getDialogValues(MultiInputDialog dialog) {
     Layer layer = dialog.getLayer(LAYER);
     layerName = layer.getName();
+    nodeInputLines = dialog.getBoolean(NODE_INPUT);
     splitLineStrings = dialog.getBoolean(SPLIT_LINESTRINGS);
   }
 }
