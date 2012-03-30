@@ -3,21 +3,21 @@
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * For more information, contact:
  *
  * Vivid Solutions
@@ -36,7 +36,7 @@ import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jcs.algorithm.linearreference.LocatePoint;
 
 /**
- * Computes the "average" distance between two linestrings,
+ * Computes the "average" distance between two {@link LineString}s,
  * based on the distance between each vertex and a point the same distance
  * along the other line.
  */
@@ -106,9 +106,15 @@ public class AverageLineDistance {
     return totalDistance / intervalCount;
   }
 
+  /**
+   * Normalizes linestrings so that they each begin with the endpoints which are
+   * closest.
+   * @param line0 an input LineString
+   * @param line1 an input LineString
+   * @return a pair of normalized LineStrings
+   */
   private LineString[] normalize(LineString line0, LineString line1)
   {
-
     LineString[] lines = new LineString[2];
     Coordinate[] edge0Pts = line0.getCoordinates();
     Coordinate[] edge1Pts = line1.getCoordinates();

@@ -3,21 +3,21 @@
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * For more information, contact:
  *
  * Vivid Solutions
@@ -38,8 +38,15 @@ import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jump.io.*;
 
 /**
- * Allows capturing streams of features during debugging
- * and outputting them afterwards
+ * Allows capturing features during debugging
+ * and outputting them afterwards.
+ * <p>
+ * To enable the debugging functions, the Java system property <code>debug</code>
+ * must be set to <code>on</code> in the java command line, using the following
+ * option:
+ * <pre>
+ *     -Ddebug=on
+ * </pre>
  */
 public class DebugFeature {
 
@@ -70,6 +77,7 @@ public class DebugFeature {
 
   public static void addLineSegment(Object tag, Coordinate p0, Coordinate p1, String msg)
   {
+    if (! Debug.isDebugging()) return;
     FeatureDataset fd = getDebugFeatureDataset(tag);
     fd.add(createLineSegmentFeature(fd.getFeatureSchema(), p0, p1, msg));
   }
@@ -85,6 +93,7 @@ public class DebugFeature {
 
   public static void add(Object tag, Geometry geom, String msg)
   {
+    if (! Debug.isDebugging()) return;
     FeatureDataset fd = getDebugFeatureDataset(tag);
     Feature feature = new BasicFeature(fd.getFeatureSchema());
     feature.setGeometry(geom);
@@ -94,6 +103,7 @@ public class DebugFeature {
 
   public static void saveFeatures(Object tag, String filename)
   {
+    if (! Debug.isDebugging()) return;
     try {
       //saveShapefile(getDebugFeatureDataset(tag), filename);
       saveJMLfile(getDebugFeatureDataset(tag), filename);

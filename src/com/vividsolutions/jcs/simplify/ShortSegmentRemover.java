@@ -97,6 +97,9 @@ public class ShortSegmentRemover
   {
     if (isRing && i < 0) return pts[pts.length - 2];
     if (isRing && i > pts.length - 2) return pts[0];
+    // suggested bug fix
+    //    if (isRing && i == pts.length) return pts[1];
+    //    if (isRing && i == pts.length - 1) return pts[0];
     /**
      *  this will delibarately cause an error
      * if the coordinates are not a ring and the index is out of range.

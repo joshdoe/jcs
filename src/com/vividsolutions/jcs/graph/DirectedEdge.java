@@ -34,13 +34,17 @@ package com.vividsolutions.jcs.graph;
 
 import java.util.*;
 import java.io.PrintStream;
+import java.io.Serializable;
+
+import com.vividsolutions.jts.algorithm.CGAlgorithms;
 import com.vividsolutions.jts.algorithm.RobustCGAlgorithms;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geomgraph.Quadrant;
 
 public class DirectedEdge
-    implements Comparable
+    implements Comparable, Serializable
 {
+
   public static List toEdges(Collection dirEdges)
   {
     List edges = new ArrayList();
@@ -53,8 +57,8 @@ public class DirectedEdge
   protected static final RobustCGAlgorithms cga = new RobustCGAlgorithms();
 
   protected Edge parentEdge;
-  protected Node from;
-  protected Node to;
+  protected transient Node from;
+  protected transient Node to;
   protected Coordinate p0, p1;
   protected DirectedEdge sym = null;  // optional
   protected boolean edgeDirection;
@@ -70,9 +74,10 @@ public class DirectedEdge
     p1 = directionPt;
     double dx = p1.x - p0.x;
     double dy = p1.y - p0.y;
+    if (dx == 0 && dy == 0)
+     System.out.println( "EdgeEnd with identical endpoints found");
     quadrant = Quadrant.quadrant(dx, dy);
     angle = Math.atan2(dy, dx);
-    //Assert.isTrue(! (dx == 0 && dy == 0), "EdgeEnd with identical endpoints found");
   }
 
   public Edge getEdge() { return parentEdge; }
@@ -115,7 +120,7 @@ public class DirectedEdge
     if (quadrant < e.quadrant) return -1;
     // vectors are in the same quadrant - check relative orientation of direction vectors
     // this is > e if it is CCW of e
-    return cga.computeOrientation(e.p0, e.p1, p1);
+    return CGAlgorithms.computeOrientation(e.p0, e.p1, p1);
   }
 
   public void print(PrintStream out)

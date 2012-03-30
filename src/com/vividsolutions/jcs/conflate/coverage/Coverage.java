@@ -35,6 +35,7 @@ package com.vividsolutions.jcs.conflate.coverage;
 import java.util.*;
 import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jts.geom.*;
+import com.vividsolutions.jcs.debug.Debug;
 
 public class Coverage
 {
@@ -52,6 +53,7 @@ public class Coverage
   public FeatureCollection getFeatures()  { return features; }
   public FeatureCollection getAdjustedFeatures()  { return adjustedFC; }
   public FeatureUpdateRecorder getUpdates()   {    return updates;    }
+
   public FeatureCollection getAdjustmentIndicators()
   {
     GeometryFactory fact = new GeometryFactory();
@@ -109,7 +111,8 @@ public class Coverage
         }
         else {
           // debugging only
-          System.out.println(g);
+          Debug.println("Invalid polygon");
+          Debug.println(g);
         }
       }
     }

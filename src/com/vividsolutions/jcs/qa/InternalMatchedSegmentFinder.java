@@ -48,6 +48,7 @@ import com.vividsolutions.jts.index.SpatialIndex;
 import com.vividsolutions.jts.util.Assert;
 import com.vividsolutions.jump.task.*;
 import com.vividsolutions.jts.util.Debug;
+
 /**
  * Finds line segments in a single
  * coverage which match but are not identical.
@@ -217,9 +218,6 @@ public Parameters getParam() {
     fsc.add(inputFC);
     List uniqueFSList = fsc.getUniqueSegments();
 
-    //OLD and INCORRECT - all segments in the input will be searched for matches
-    //createIndex(fsc.getSegments());
-
     // it is only necessary to check unique segments to see if they match,
     // since non-unique segments by definition are already aligned.
     createIndex(uniqueFSList);
@@ -252,12 +250,6 @@ public Parameters getParam() {
         continue;
       itemEnv.init(fs.p0, fs.p1);
       monitor.report(++count, totalSegments, "segments");
-//Debugging
-//if (count == 930) {
-//  System.out.println(itemEnv);
-//  System.out.println(fs.getFeature().getGeometry());
-//}
-//System.out.println(count++);
       segIndex.insert(new Envelope(itemEnv), fs);
     }
   }

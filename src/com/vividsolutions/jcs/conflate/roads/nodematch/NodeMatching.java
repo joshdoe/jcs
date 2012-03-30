@@ -3,21 +3,21 @@
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * For more information, contact:
  *
  * Vivid Solutions
@@ -32,11 +32,15 @@
 
 package com.vividsolutions.jcs.conflate.roads.nodematch;
 
-import java.util.*;
-import com.vividsolutions.jcs.graph.*;
-import com.vividsolutions.jump.geom.Angle;
-import com.vividsolutions.jcs.conflate.roads.RoadNode;
+import java.util.List;
+
+import com.vividsolutions.jcs.graph.DirectedEdge;
+import com.vividsolutions.jcs.graph.DirectedEdgeStar;
+import com.vividsolutions.jcs.graph.Edge;
+import com.vividsolutions.jcs.graph.Node;
 import com.vividsolutions.jts.util.Assert;
+import com.vividsolutions.jump.geom.Angle;
+
 /**
  * Represents a possible way of matching the edges around two nodes.
  * An edge of a node may either match an edge in the other node
@@ -44,6 +48,16 @@ import com.vividsolutions.jts.util.Assert;
  */
 public class NodeMatching
 {
+
+  /**
+   * Computes a match value based on the distance between the matched nodes.
+   * Value is normalized to lie in [0,1],
+   * based on the maximum allowable distance value.
+   *
+   * @param maxDistance the maximum distance allowed between matched nodes
+   * @param candidateDistance the distance between two matched nodes
+   * @return a match value between 0 and 1
+   */
   public static double nodeDistanceMatchValue(double maxDistance, double candidateDistance)
   {
     double relDistValue = candidateDistance / maxDistance;
@@ -61,7 +75,7 @@ public class NodeMatching
     List edges = deStar.getEdges();
     for (int i = 0; i < deStar.getNumEdges(); i++) {
       DirectedEdge de = (DirectedEdge) edges.get(i);
-      matchNode.setEdge(i, de.getAngle());
+      matchNode.setEdge(i, de.getAngle(), de);
     }
     return matchNode;
   }
@@ -89,7 +103,7 @@ public class NodeMatching
     srcNode[1] = n2;
   }
 
-  public NodeMatching(MatchNode mn1, MatchNode mn2)
+  private NodeMatching(MatchNode mn1, MatchNode mn2)
   {
     matchNode = new MatchNode[] { mn1, mn2 };
     matchNode[0].match(matchNode[1], Angle.PI_OVER_4);
@@ -98,6 +112,8 @@ public class NodeMatching
   //public boolean isMatch() { return isMatch; }
 
   public Node getNode(int nodeIndex) { return srcNode[nodeIndex]; }
+
+  public MatchNode[] getMatchNodes() { return matchNode; }
 
   public Node getMatchedNode(Node queryNode)
   {
@@ -116,7 +132,7 @@ public class NodeMatching
   public int getMatchedEdgeIndex(Node node, int edgeIndex)
   {
     int nodeIndex = getNodeIndex(node);
-    return matchNode[nodeIndex].edges[edgeIndex].index;
+    return matchNode[nodeIndex].edges[edgeIndex].getIndex();
   }
 
   public Edge getMatchedEdge(Node n, Edge edge)
@@ -127,6 +143,17 @@ public class NodeMatching
     Node otherNode = getMatchedNode(n);
     DirectedEdge dirEdge = (DirectedEdge) otherNode.getOutEdges().getEdges().get(matchEdgeIndex);
     return dirEdge.getEdge();
+  }
+
+  /**
+   * Get a list of all the {@link MatchEdge}s around the first node in this matching.
+   * Note that unmatched edges around either match node will not be
+   * present in this list.
+   * @return
+   */
+  public List getEdgeMatches()
+  {
+    return matchNode[0].getEdgeMatches();
   }
 
   public double exactTopoMatchValue()
@@ -165,12 +192,14 @@ public class NodeMatching
   /**
    *  Combines match values for both edge angle matches and node distance
    */
-  public double angleDistanceMatchValue(RoadNode node1, RoadNode node2)
+  public double angleDistanceMatchValue(double nodeDistanceTolerance)
   {
-    double matchedEdgeCountValue = edgeMatchValue();
+    double edgeMatchValue = edgeMatchValue();
 
-    double candidateDist = node1.getCoordinate().distance(node2.getCoordinate());
-    double distMatchDistance = nodeDistanceMatchValue(node1.getMaxAdjacentNodeDistance(), candidateDist);
+    double candidateDist = srcNode[0].getCoordinate().distance(srcNode[1].getCoordinate());
+    if (candidateDist > nodeDistanceTolerance) return 0.0;
+
+    double distMatchDistance = nodeDistanceMatchValue(nodeDistanceTolerance, candidateDist);
     // match function is 1 if position is identical, falling to 0 at infinity
     //double distMatchValue = (dist == 0.0 ? 1.0 : 1 / dist);
     //double distMatchValue = 1.0;
@@ -182,8 +211,33 @@ public class NodeMatching
     //double matchValue = 0.5 * matchedEdgeCountValue + 0.5 * distMatchDistance;
 
     // empirical testing seems to show the following is a good heuristic
-    double matchValue = 0.3 * matchedEdgeCountValue + 0.7 * distMatchDistance;
+    double matchValue = 0.4 * edgeMatchValue + 0.6 * distMatchDistance;
+    //double matchValue = 0.3 * matchedEdgeCountValue + 0.7 * distMatchDistance;
 
     return matchValue;
+  }
+
+  /**
+   * Compute a match value based on the node distance and topology,
+   * but reduced if one of the nodes is a 2-node.
+   * Idea is that nodes which are not very topologically significant
+   * should have lower match values.
+   *
+   * @param nodeDistanceTolerance
+   * @return
+   */
+  public double angleDistTopoSignificanceAdjustedMatchValue(double nodeDistanceTolerance)
+  {
+    double angleDistanceMatchValue = angleDistanceMatchValue(nodeDistanceTolerance);
+
+    boolean is2Node = matchNode[0].getNumEdges() == 2;
+    is2Node |= matchNode[1].getNumEdges() == 2;
+
+    boolean isTopoSignificant = ! is2Node;
+
+    double reducedMatchValue = angleDistanceMatchValue;
+    if (! isTopoSignificant)
+      reducedMatchValue = .3 * angleDistanceMatchValue;
+    return reducedMatchValue;
   }
 }

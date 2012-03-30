@@ -38,6 +38,7 @@ import com.vividsolutions.jcs.graph.*;
 class PolyEdge
     extends Edge
 {
+
   private LineString line;
 
   public PolyEdge(LineString line)

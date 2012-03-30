@@ -36,9 +36,10 @@ package com.vividsolutions.jcs.algorithm;
 
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jump.geom.LineSegmentUtil;
+
 /**
  * Implements algorithm for computing a distance metric
- * which can be thought of as the "Maximum Vertex Distance".
+ * which can be thought of as the "Vertex Hausdorff Distance".
  * This is the Hausdorff distance restricted to vertices for
  * one of the geometries.
  * Also computes two points of the Geometries which are separated by the computed distance.
@@ -46,12 +47,19 @@ import com.vividsolutions.jump.geom.LineSegmentUtil;
  * <b>NOTE: This algorithm does NOT compute the full Hausdorff distance correctly, but
  * an approximation that is correct for a large subset of useful cases.
  * One important part of this subset is Linestrings that are roughly parallel to each other,
- * and roughly equal in length.
+ * and roughly equal in length - just what is needed for line matching.
  * </b>
  */
-public class VertexHausdorffDistance {
+public class VertexHausdorffDistance
+{
 
-  PointPairDistance ptDist = new PointPairDistance();
+  public static double distance(Geometry g0, Geometry g1)
+  {
+    VertexHausdorffDistance vhd = new VertexHausdorffDistance(g0, g1);
+    return vhd.distance();
+  }
+
+  private PointPairDistance ptDist = new PointPairDistance();
 
   public VertexHausdorffDistance(Geometry g0, Geometry g1)
   {

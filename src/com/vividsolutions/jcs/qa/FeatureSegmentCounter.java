@@ -5,21 +5,21 @@
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * For more information, contact:
  *
  * Vivid Solutions
@@ -39,9 +39,9 @@ import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jump.geom.*;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.geom.LineSegment;
-import com.vividsolutions.jump.util.DebugTimer;
 import com.vividsolutions.jump.util.CoordinateArrays;
 import com.vividsolutions.jump.task.*;
+
 /**
  * Keeps a count of
  * distinct LineSegments (as a Map from LineSegments to counts).
@@ -63,7 +63,8 @@ public class FeatureSegmentCounter {
   private LineSegmentEnvelopeIntersector lineEnvInt;
 
   /**
-   * Creates a new counter, allowing control over whether zero-length segments are counted.
+   * Creates a new counter, allowing control over
+   * whether zero-length segments are counted.
    *
    * @param countZeroLengthSegments if <code>false</code>, zero-length segments will be ignored
    */
@@ -149,7 +150,7 @@ public class FeatureSegmentCounter {
     List unique = new ArrayList();
     for (Iterator i = segmentMap.values().iterator(); i.hasNext(); ) {
       FeatureSegmentCount count = (FeatureSegmentCount) i.next();
-      if (count.getValue() == 1)
+      if (count.getCount() == 1)
         unique.add(count.getSegment());
     }
     return unique;
@@ -178,24 +179,24 @@ public class FeatureSegmentCounter {
     querySegment.setCoordinates(p0, p1);
     querySegment.normalize();
     FeatureSegmentCount count = (FeatureSegmentCount) segmentMap.get(querySegment);
-    return count.getValue();
+    return count.getCount();
   }
 
   public class FeatureSegmentCount {
 
-    private int value = 0;
+    private int count = 0;
     private LineSegment seg;
 
     public FeatureSegmentCount(int value, LineSegment seg) {
-      this.value = value;
+      this.count = value;
       this.seg = seg;
     }
 
-    public int getValue() { return value; }
+    public int getCount() { return count; }
     public LineSegment getSegment() { return seg; }
 
     public void increment()
     {
-      value++;
+      count++;
     }
 }}

@@ -3,21 +3,21 @@
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * For more information, contact:
  *
  * Vivid Solutions
@@ -32,18 +32,26 @@
 
 package com.vividsolutions.jcs.conflate.roads.nodematch;
 
+import java.io.Serializable;
 import java.util.*;
 
 import com.vividsolutions.jump.geom.Angle;
-import com.vividsolutions.jts.util.Assert;
+import com.vividsolutions.jts.util.*;
+import com.vividsolutions.jcs.graph.*;
 
 
 /**
  * Represents a matching of edges originating at two nodes.
  * The matching is based only on the angles of the edges around each node.
+ * <p>
+ * <h2>Future</h2>
+ * Allow angle to be computed from a length of the input linestring, not just
+ * the closest line segment (This will accomodate small ending line segments with
+ * angles which do not well represent the overall angle of the incident edge).
  */
-public class MatchNode
+public class MatchNode implements Serializable
 {
+
   public static final int UNMATCHED = -1;
 
   MatchEdge[] edges;
@@ -57,9 +65,9 @@ public class MatchNode
   {
     return edges[index];
   }
-  public void setEdge(int index, double angle)
+  public void setEdge(int index, double angle, DirectedEdge de)
   {
-    edges[index] = new MatchEdge(index, angle);
+    edges[index] = new MatchEdge(index, angle, de);
   }
 
   public int getNumEdges() { return edges.length; }
@@ -73,9 +81,29 @@ public class MatchNode
     }
     return matchedEdgeCount;
   }
+
+  /**
+   * Get a list of all the {@link MatchEdge}s around the first node in this matching.
+   * Note that unmatched edges around either match node will not be
+   * present in this list.
+   * @return
+   */
+  public List getEdgeMatches()
+  {
+    List edgeMatches = new ArrayList();
+    int matchedEdgeCount = 0;
+    for (int i = 0; i < edges.length; i++) {
+      if (edges[i].isMatched())
+        edgeMatches.add(edges[i]);
+    }
+    return edgeMatches;
+  }
+
   public void match(MatchNode other, double maxAngleDiff)
   {
-    matchSlice(0, edges.length - 1, other, 0, other.edges.length - 1, true, maxAngleDiff);
+    //matchSlice(0, edges.length - 1, other, 0, other.edges.length - 1, true, maxAngleDiff);
+    // initially process all the edges.
+    matchSlice(0, 0, other, 0, 0, true, maxAngleDiff);
   }
   public int previousIndex(int index)  {    return (index - 1 + edges.length) % edges.length;  }
   public int nextIndex(int index)  {    return (index + 1) % edges.length;  }
@@ -84,13 +112,15 @@ public class MatchNode
    * Matches two "slices" of edges in two MatchNodes.
    * The slice contains edges from from edge[start] to edge[end - 1],
    * unless processAllEdges is <code>true</code>, in which case
-   * the unmatched block of edges runs from edge[start] to edge[end]
+   * the unmatched block of edges runs from edge[start] to edge[end] inclusive.
+   * (The indexing is circular, so if start == end all edges will be processed)
    * @param start
    * @param end
    * @param other
    * @param otherStart
    * @param otherEnd
    * @param processAllEdges
+   * @param maxAngleDiff
    */
   private void matchSlice(int start, int end,
                              MatchNode other,
@@ -99,10 +129,11 @@ public class MatchNode
                              double maxAngleDiff)
   {
     // one or other of the slices is empty, so no need to continue (but this counts as a valid match)
-    if (start == end || otherStart == otherEnd) return;
+    if (! processAllEdges && (start == end || otherStart == otherEnd)) return;
 
     int[] matchIndex = new int[2];
     double matchAngle = findClosestEdge(start, end, other, otherStart, otherEnd, processAllEdges, matchIndex);
+//Debug.println("match angle = " + matchAngle);
     if (matchAngle >  maxAngleDiff ) return;
 
     // set the matched edges
@@ -119,7 +150,7 @@ public class MatchNode
     if (processAllEdges) {
       matchSlice(nextIndex(matchIndex[0]), matchIndex[0],
                  other,
-                 nextIndex(matchIndex[1]), matchIndex[1],
+                 other.nextIndex(matchIndex[1]), matchIndex[1],
                  false, maxAngleDiff);
     }
     else {
@@ -147,12 +178,19 @@ public class MatchNode
 
     matchIndex[0] = UNMATCHED;
     matchIndex[1] = UNMATCHED;
-    MatchEdge[] closestEdge = new MatchEdge[2];
+    //MatchEdge[] closestEdge = new MatchEdge[2];
     double minAngleDiff = Double.MAX_VALUE;
     for (int i = start; isFirst || i != end; i = nextIndex(i)) {
       //Assert: ! edges[i].isMatched()
       for (int j = otherStart; isFirstOther || j != otherEnd; j = other.nextIndex(j)) {
         // Assert: ! edges[j].isMatched()
+//        try {
+//          MatchEdge e = edges[i];
+//          e = other.edges[j];
+//        }
+//        catch (Exception ex) {
+//          System.out.println(i);
+//        }
         double angleDiff = Angle.diff(edges[i].getCurrentAngle(), other.edges[j].getCurrentAngle());
         if (angleDiff < minAngleDiff) {
           matchIndex[0] = i;

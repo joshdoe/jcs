@@ -5,21 +5,21 @@
  * can be used to build automated or semi-automated conflation solutions.
  *
  * Copyright (C) 2003 Vivid Solutions
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * For more information, contact:
  *
  * Vivid Solutions
@@ -121,9 +121,9 @@ public class Shell
     }
     coordList.closeRing();
 
-    removeRepeatedSegments(coordList);
+    CoordinateList noRepeatCoordList = removeRepeatedSegments(coordList);
 
-    adjustedCoord = coordList.toCoordinateArray();
+    adjustedCoord = noRepeatCoordList.toCoordinateArray();
   }
 
   /**
@@ -132,22 +132,25 @@ public class Shell
    *
    * @param coordList
    */
-  private void removeRepeatedSegments(CoordinateList coordList)
+  private CoordinateList removeRepeatedSegments(CoordinateList coordList)
   {
-    CoordinateList newCoordList = new CoordinateList();
+    CoordinateList noRepeatCoordList = new CoordinateList();
     for (int i = 0; i < coordList.size() - 1; i++) {
       Coordinate a = coordList.getCoordinate(i);
+      noRepeatCoordList.add(a, false);
+
+      // check for a-b-a pattern
       Coordinate b = coordList.getCoordinate(i + 1);
       int nexti = i + 2;
       if (nexti >= coordList.size()) nexti = 1;
       Coordinate a2 = coordList.getCoordinate(nexti);
+      // if a = a2 we have found a-b-a pattern, so skip b
       if (a.equals(a2)) {
-        newCoordList.add(a, false);
-        // skip dropped coordinate
         i++;
       }
-      newCoordList.closeRing();
     }
+    noRepeatCoordList.closeRing();
+    return noRepeatCoordList;
   }
 
   public boolean isConflict()

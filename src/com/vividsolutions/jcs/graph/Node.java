@@ -32,13 +32,17 @@
 
 package com.vividsolutions.jcs.graph;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.vividsolutions.jts.geom.Coordinate;
 
 /**
  */
 public class Node
-{
+{  
   /**
    * The input nodes are assumed to be different
    */
@@ -66,11 +70,6 @@ public class Node
   }
 
   public Coordinate getCoordinate() { return pt; }
-
-  public void addOutEdge(DirectedEdge de)
-  {
-    deStar.add(de);
-  }
 
   public DirectedEdgeStar getOutEdges() { return deStar; }
   public int getDegree() { return deStar.getDegree(); }
