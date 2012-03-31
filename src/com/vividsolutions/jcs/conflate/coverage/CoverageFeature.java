@@ -34,8 +34,8 @@
 
 package com.vividsolutions.jcs.conflate.coverage;
 
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jcs.conflate.boundarymatch.SegmentMatcher;
 

@@ -40,8 +40,8 @@ import java.util.List;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.CoordinateFilter;
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jump.geom.CoordUtil;
-import com.vividsolutions.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.geom.CoordUtil;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
 
 /**
  * Functions useful to FeatureMatchers in general.

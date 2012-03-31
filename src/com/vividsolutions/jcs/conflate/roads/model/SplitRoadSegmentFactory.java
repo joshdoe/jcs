@@ -1,11 +1,10 @@
 package com.vividsolutions.jcs.conflate.roads.model;
 
-import java.util.HashSet;
-
 import com.vividsolutions.jcs.jump.FUTURE_CollectionUtil;
 import com.vividsolutions.jcs.jump.FUTURE_LineString;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.util.Assert;
+import java.util.HashSet;
 
 public class SplitRoadSegmentFactory {
 

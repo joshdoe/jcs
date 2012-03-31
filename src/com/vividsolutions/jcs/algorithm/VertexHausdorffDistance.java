@@ -34,8 +34,10 @@
 
 package com.vividsolutions.jcs.algorithm;
 
-import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.geom.LineSegmentUtil;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.CoordinateFilter;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.LineSegment;
 
 /**
  * Implements algorithm for computing a distance metric

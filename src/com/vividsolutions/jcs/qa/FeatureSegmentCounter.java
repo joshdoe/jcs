@@ -34,13 +34,16 @@
 
 package com.vividsolutions.jcs.qa;
 
-import java.util.*;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.geom.*;
-import com.vividsolutions.jts.geom.*;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Envelope;
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineSegment;
-import com.vividsolutions.jump.util.CoordinateArrays;
-import com.vividsolutions.jump.task.*;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.geom.LineSegmentEnvelopeIntersector;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
+import java.util.*;
 
 /**
  * Keeps a count of

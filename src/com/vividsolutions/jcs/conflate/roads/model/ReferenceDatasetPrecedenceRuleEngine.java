@@ -2,6 +2,10 @@ package com.vividsolutions.jcs.conflate.roads.model;
 
 import com.vividsolutions.jts.util.Assert;
 
+/**
+ * @PrecedenceRuleEngine that always chooses the @SourceRoadSegment from the 
+ * reference dataset.
+ */
 public class ReferenceDatasetPrecedenceRuleEngine implements
 		PrecedenceRuleEngine {
 	public ReferenceDatasetPrecedenceRuleEngine() {

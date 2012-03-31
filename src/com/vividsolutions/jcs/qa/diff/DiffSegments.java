@@ -34,9 +34,11 @@
 
 package com.vividsolutions.jcs.qa.diff;
 
-import com.vividsolutions.jump.feature.*;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 import com.vividsolutions.jcs.qa.UnmatchedEdgeExtracter;
 /**
  * Finds all line segments in two

@@ -35,10 +35,11 @@
 package com.vividsolutions.jcs.qa.diff;
 
 
-import com.vividsolutions.jump.feature.*;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.geom.LineSegmentUtil;
+import com.vividsolutions.jcs.jump.geom.LineSegmentUtil;
 
 /**
  * <code>DiffEdges</code> find all line segments in two

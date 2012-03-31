@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
 
 public class HideConflationAttributesFeature implements Feature, Serializable {
 

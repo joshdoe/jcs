@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedSet;
 
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 /**
  * Enforces a one-to-one relationship between target features and
  * matched candidate features, in the returned result set.

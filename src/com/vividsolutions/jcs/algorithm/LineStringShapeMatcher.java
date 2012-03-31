@@ -34,7 +34,7 @@ package com.vividsolutions.jcs.algorithm;
 
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jcs.algorithm.LineStringWidth;
-import com.vividsolutions.jump.geom.Angle;
+import com.vividsolutions.jcs.geom.Angle;
 
 
 /**

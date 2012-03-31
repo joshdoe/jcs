@@ -31,10 +31,12 @@
  */
 package com.vividsolutions.jcs.simplify;
 
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.feature.FeatureUpdateRecorder;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.task.*;
 
 public class FeatureShortSegmentRemover {
 

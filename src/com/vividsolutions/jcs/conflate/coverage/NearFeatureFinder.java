@@ -34,9 +34,11 @@
 
 package com.vividsolutions.jcs.conflate.coverage;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.IndexedFeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.geom.EnvelopeUtil;
+import com.vividsolutions.jcs.jump.geom.EnvelopeUtil;
 import com.vividsolutions.jts.geom.*;
 
 

@@ -34,8 +34,8 @@
 
 package com.vividsolutions.jcs.conflate.boundarymatch;
 
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
 import com.vividsolutions.jts.algorithm.RobustCGAlgorithms;
 import com.vividsolutions.jts.geom.*;
 import java.util.*;

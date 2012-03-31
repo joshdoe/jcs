@@ -10,8 +10,8 @@ import com.vividsolutions.jcs.conflate.roads.model.SourceState;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.index.SpatialIndex;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
 
 /**
  * Based on the apparent lines from both networks

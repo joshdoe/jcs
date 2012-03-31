@@ -37,8 +37,8 @@ package com.vividsolutions.jcs.conflate.polygonmatch;
 import java.util.Iterator;
 
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
 
 /**
  * Base class of FeatureMatchers that compare the target to each candidate

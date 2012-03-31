@@ -1,17 +1,16 @@
 package com.vividsolutions.jcs.conflate.roads.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
-
 import com.vividsolutions.jcs.graph.DirectedEdge;
 import com.vividsolutions.jcs.graph.Edge;
 import com.vividsolutions.jcs.jump.FUTURE_CollectionUtil;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
 
 public abstract class RoadSegment extends Edge {    
 

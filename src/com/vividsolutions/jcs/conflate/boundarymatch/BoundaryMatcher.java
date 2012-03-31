@@ -34,10 +34,18 @@
 
 package com.vividsolutions.jcs.conflate.boundarymatch;
 
-import java.util.*;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.util.*;
-import com.vividsolutions.jts.geom.*;
+import com.vividsolutions.jcs.jump.feature.FeatureUpdateRecorder;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
+import com.vividsolutions.jcs.jump.feature.BasicFeature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jcs.jump.util.DebugTimer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class BoundaryMatcher {
 

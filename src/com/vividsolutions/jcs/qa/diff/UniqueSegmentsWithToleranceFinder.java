@@ -31,11 +31,11 @@
  */
 package com.vividsolutions.jcs.qa.diff;
 
+import com.vividsolutions.jcs.jump.geom.EnvelopeUtil;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.util.CoordinateArrays;
-import com.vividsolutions.jump.geom.*;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
 import com.vividsolutions.jcs.feature.FeatureCollectionGeometryIterator;
 import com.vividsolutions.jcs.algorithm.VertexHausdorffDistance;
 

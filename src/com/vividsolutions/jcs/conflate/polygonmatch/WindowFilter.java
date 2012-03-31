@@ -35,9 +35,9 @@
 package com.vividsolutions.jcs.conflate.polygonmatch;
 
 import com.vividsolutions.jts.geom.Envelope;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
-import com.vividsolutions.jump.geom.EnvelopeUtil;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.geom.EnvelopeUtil;
 
 /**
  * Quickly filters out shapes that lie outside a given distance from the feature's

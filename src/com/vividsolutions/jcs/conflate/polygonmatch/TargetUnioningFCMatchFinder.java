@@ -30,15 +30,20 @@
  * www.vividsolutions.com
  */
 package com.vividsolutions.jcs.conflate.polygonmatch;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.IndexedFeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.feature.BasicFeature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
 import java.util.*;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.task.TaskMonitor;
-import com.vividsolutions.jump.util.CollectionUtil;
-import com.vividsolutions.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
 /**
  *  An FCMatchFinder wrapper that also treats unions of adjacent target features
  *  as themselves target features. Such unions are formed into composite target

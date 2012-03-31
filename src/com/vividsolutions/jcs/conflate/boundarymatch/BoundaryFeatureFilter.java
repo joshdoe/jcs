@@ -33,11 +33,11 @@
  */
 
 package com.vividsolutions.jcs.conflate.boundarymatch;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
-import com.vividsolutions.jump.feature.IndexedFeatureCollection;
-import com.vividsolutions.jump.util.DebugTimer;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.IndexedFeatureCollection;
+import com.vividsolutions.jcs.jump.util.DebugTimer;
 import com.vividsolutions.jts.geom.*;
 
 import java.util.*;

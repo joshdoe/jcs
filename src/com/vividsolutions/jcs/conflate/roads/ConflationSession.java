@@ -1,10 +1,15 @@
 package com.vividsolutions.jcs.conflate.roads;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.feature.BasicFeature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.AttributeType;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,20 +20,16 @@ import java.util.Set;
 import com.vividsolutions.jcs.conflate.roads.match.RoadMatchOptions;
 import com.vividsolutions.jcs.conflate.roads.match.RoadMatcherProcess;
 import com.vividsolutions.jcs.conflate.roads.model.*;
-import com.vividsolutions.jcs.conflate.roads.model.adjustedmatchconsistency.AdjustedMatchConsistencyRule;
 import com.vividsolutions.jcs.conflate.roads.model.sourcematchconsistency.SourceMatchConsistencyRule;
 import com.vividsolutions.jcs.jump.FUTURE_CollectionUtil;
-import com.vividsolutions.jcs.plugin.RoadMatcherExtension;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.index.SpatialIndex;
 import com.vividsolutions.jts.index.strtree.STRtree;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.task.TaskMonitor;
-import com.vividsolutions.jump.util.Blackboard;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
-import com.vividsolutions.jump.workbench.ui.plugin.AddNewLayerPlugIn;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.util.Blackboard;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
 
 /**
  * The overall container class that represents the entire process of merging two
@@ -129,12 +130,18 @@ public class ConflationSession implements Serializable {
 	public ConflationSession(FeatureCollection originalFeatureCollection0,
 			FeatureCollection originalFeatureCollection1) {
 		this(DEFAULT_NAME, originalFeatureCollection0,
-				originalFeatureCollection1, AddNewLayerPlugIn
-						.createBlankFeatureCollection(), AddNewLayerPlugIn
-						.createBlankFeatureCollection(), AddNewLayerPlugIn
-						.createBlankFeatureCollection(), AddNewLayerPlugIn
-						.createBlankFeatureCollection());
+				originalFeatureCollection1,
+                                createBlankFeatureCollection(),
+                                createBlankFeatureCollection(),
+                                createBlankFeatureCollection(),
+                                createBlankFeatureCollection());
 	}
+        
+    private static FeatureCollection createBlankFeatureCollection() {
+        FeatureSchema featureSchema = new FeatureSchema();
+        featureSchema.addAttribute("GEOMETRY", AttributeType.GEOMETRY);
+        return new FeatureDataset(featureSchema);
+    }
 
 	private static SpatialIndex index(Collection nodeConstraintCoordinates) {
 		STRtree index = new STRtree();
@@ -205,8 +212,8 @@ public class ConflationSession implements Serializable {
 	}
 
 	private static FeatureCollection toFeatureCollection(Collection geometries) {
-		FeatureCollection featureCollection = AddNewLayerPlugIn
-				.createBlankFeatureCollection();
+            // FIXME: use FeatureCollection factory?
+            FeatureCollection featureCollection = createBlankFeatureCollection();
 		for (Iterator i = geometries.iterator(); i.hasNext();) {
 			Geometry geometry = (Geometry) i.next();
 			Feature feature = new BasicFeature(featureCollection

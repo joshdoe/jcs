@@ -38,7 +38,7 @@ import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jcs.polygonize.Polygonizer;
 import com.vividsolutions.jcs.algorithm.linearreference.LocatePoint;
 import com.vividsolutions.jcs.conflate.roads.ErrorMessages;
-import com.vividsolutions.jump.task.DummyTaskMonitor;
+import com.vividsolutions.jcs.jump.util.DummyTaskMonitor;
 
 public class LineStringMatchIndicatorFactory {
 

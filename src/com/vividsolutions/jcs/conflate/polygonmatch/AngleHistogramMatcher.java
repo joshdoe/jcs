@@ -36,8 +36,8 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.WKTReader;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.geom.Angle;
-import com.vividsolutions.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.geom.Angle;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
 /**
  * Matches geometries by comparing their "angle histograms". An angle histogram
  * is a histogram of segment angles (with the positive x-axis), weighted by

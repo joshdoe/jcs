@@ -1,10 +1,9 @@
 package com.vividsolutions.jcs.conflate.roads.model;
 
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jcs.jump.util.Blackboard;
 import java.io.Serializable;
 import java.util.HashMap;
-
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jump.util.Blackboard;
 
 public class ResultState implements Serializable {
 

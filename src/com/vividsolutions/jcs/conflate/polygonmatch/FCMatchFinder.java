@@ -36,8 +36,8 @@ package com.vividsolutions.jcs.conflate.polygonmatch;
 
 import java.util.Map;
 
-import com.vividsolutions.jump.feature.FeatureCollection;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 
 public interface FCMatchFinder {
     /**

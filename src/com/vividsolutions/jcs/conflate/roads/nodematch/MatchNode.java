@@ -35,7 +35,7 @@ package com.vividsolutions.jcs.conflate.roads.nodematch;
 import java.io.Serializable;
 import java.util.*;
 
-import com.vividsolutions.jump.geom.Angle;
+import com.vividsolutions.jcs.geom.Angle;
 import com.vividsolutions.jts.util.*;
 import com.vividsolutions.jcs.graph.*;
 

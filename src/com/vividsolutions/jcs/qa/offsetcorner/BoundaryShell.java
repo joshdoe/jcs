@@ -33,9 +33,9 @@ package com.vividsolutions.jcs.qa.offsetcorner;
 
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.geom.LineSegmentUtil;
+import com.vividsolutions.jcs.jump.geom.LineSegmentUtil;
 import com.vividsolutions.jcs.conflate.boundarymatch.SegmentMatcher;
-import com.vividsolutions.jump.geom.Angle;
+import com.vividsolutions.jcs.geom.Angle;
 
 /**
  * Models a polygon shell on the boundary of a dataset.

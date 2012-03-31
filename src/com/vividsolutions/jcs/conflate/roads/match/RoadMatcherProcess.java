@@ -1,10 +1,16 @@
 package com.vividsolutions.jcs.conflate.roads.match;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.feature.BasicFeature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.AttributeType;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
 import java.util.*;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 import com.vividsolutions.jcs.conflate.roads.model.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jcs.conflate.roads.nodematch.RoadNodeMatcher;
 import com.vividsolutions.jcs.conflate.roads.pathmatch.RoadNetworkPathMatcher;
 

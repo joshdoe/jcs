@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.vividsolutions.jump.task.TaskMonitor;
-import com.vividsolutions.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
 
 public abstract class AbstractStateTransitionImpactAssessment implements
 		StateTransitionImpactAssessment {

@@ -6,7 +6,7 @@ import com.vividsolutions.jcs.graph.*;
 import com.vividsolutions.jcs.geom.LineStringUtil;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.geom.Angle;
+import com.vividsolutions.jcs.geom.Angle;
 import java.util.Iterator;
 
 /**

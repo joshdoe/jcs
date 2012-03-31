@@ -32,10 +32,17 @@
 
 package com.vividsolutions.jcs.debug;
 
-import java.util.*;
-import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.io.*;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.feature.BasicFeature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.AttributeType;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LineString;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Allows capturing features during debugging
@@ -101,35 +108,35 @@ public class DebugFeature {
     fd.add(feature);
   }
 
-  public static void saveFeatures(Object tag, String filename)
-  {
-    if (! Debug.isDebugging()) return;
-    try {
-      //saveShapefile(getDebugFeatureDataset(tag), filename);
-      saveJMLfile(getDebugFeatureDataset(tag), filename);
-    }
-    catch (Exception ex) {
-      ex.printStackTrace();
-    }
+//  public static void saveFeatures(Object tag, String filename)
+//  {
+//    if (! Debug.isDebugging()) return;
+//    try {
+//      //saveShapefile(getDebugFeatureDataset(tag), filename);
+//      saveJMLfile(getDebugFeatureDataset(tag), filename);
+//    }
+//    catch (Exception ex) {
+//      ex.printStackTrace();
+//    }
+//
+//  }
 
-  }
-
-  private static void saveShapefile(FeatureCollection fc, String filename)
-      throws Exception
-  {
-    ShapefileWriter writer = new ShapefileWriter();
-    DriverProperties dp = new DriverProperties();
-    dp.set("File", filename);
-    writer.write(fc, dp);
-  }
-
-  private static void saveJMLfile(FeatureCollection fc, String filename)
-      throws Exception
-  {
-    JMLWriter writer = new JMLWriter();
-    DriverProperties dp = new DriverProperties();
-    dp.set("File", filename);
-    writer.write(fc, dp);
-  }
+//  private static void saveShapefile(FeatureCollection fc, String filename)
+//      throws Exception
+//  {
+//    ShapefileWriter writer = new ShapefileWriter();
+//    DriverProperties dp = new DriverProperties();
+//    dp.set("File", filename);
+//    writer.write(fc, dp);
+//  }
+//
+//  private static void saveJMLfile(FeatureCollection fc, String filename)
+//      throws Exception
+//  {
+//    JMLWriter writer = new JMLWriter();
+//    DriverProperties dp = new DriverProperties();
+//    dp.set("File", filename);
+//    writer.write(fc, dp);
+//  }
 
 }

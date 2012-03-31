@@ -8,7 +8,7 @@ import com.vividsolutions.jcs.graph.*;
 import com.vividsolutions.jcs.conflate.linearpathmatch.*;
 import com.vividsolutions.jcs.conflate.linearpathmatch.match.*;
 import com.vividsolutions.jcs.conflate.linearpathmatch.split.*;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 import com.vividsolutions.jts.util.*;
 import com.vividsolutions.jts.geom.*;
 

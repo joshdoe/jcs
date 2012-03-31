@@ -34,11 +34,11 @@
 
 package com.vividsolutions.jcs.conflate.boundarymatch;
 
-import com.vividsolutions.jump.geom.CoordinateList;
-import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.util.CoordinateArrays;
-import com.vividsolutions.jts.geom.*;
-import java.util.*;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.CoordinateList;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *  A {@link MatchedShell} for a feature in a Reference dataset.

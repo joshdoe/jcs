@@ -6,12 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.vividsolutions.jts.geom.Envelope;
-import com.vividsolutions.jump.feature.BasicFeature;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
-import com.vividsolutions.jump.feature.FeatureSchema;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.feature.BasicFeature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
 
 public class RoadNetworkFeatureCollection implements FeatureCollection, Serializable {
 

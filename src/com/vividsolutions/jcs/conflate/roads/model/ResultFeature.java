@@ -2,9 +2,9 @@ package com.vividsolutions.jcs.conflate.roads.model;
 import com.vividsolutions.jcs.jump.FUTURE_AbstractBasicFeature;
 import com.vividsolutions.jcs.jump.FUTURE_AttributeMapping;
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureSchema;
-import com.vividsolutions.jump.feature.FeatureUtil;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.feature.FeatureUtil;
 /**
  * @deprecated however, this class has useful logic for attribute transfer
  */

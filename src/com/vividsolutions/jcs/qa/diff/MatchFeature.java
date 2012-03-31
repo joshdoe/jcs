@@ -31,7 +31,7 @@
  */
 package com.vividsolutions.jcs.qa.diff;
 
-import com.vividsolutions.jump.feature.*;
+import com.vividsolutions.jcs.jump.feature.Feature;
 
 public class MatchFeature
 {

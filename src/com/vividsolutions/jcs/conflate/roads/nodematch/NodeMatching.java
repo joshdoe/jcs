@@ -39,7 +39,7 @@ import com.vividsolutions.jcs.graph.DirectedEdgeStar;
 import com.vividsolutions.jcs.graph.Edge;
 import com.vividsolutions.jcs.graph.Node;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.geom.Angle;
+import com.vividsolutions.jcs.geom.Angle;
 
 /**
  * Represents a possible way of matching the edges around two nodes.

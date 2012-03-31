@@ -34,12 +34,14 @@
 
 package com.vividsolutions.jcs.qa;
 
+import com.vividsolutions.jcs.jump.geom.LineSegmentUtil;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
 import com.vividsolutions.jcs.conflate.boundarymatch.*;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.geom.*;
-import com.vividsolutions.jump.util.CoordinateArrays;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.index.SpatialIndex;

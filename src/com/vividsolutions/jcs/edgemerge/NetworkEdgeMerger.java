@@ -1,7 +1,9 @@
 package com.vividsolutions.jcs.edgemerge;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jcs.graph.*;
 import com.vividsolutions.jts.geom.*;
 /**

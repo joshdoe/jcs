@@ -32,14 +32,13 @@
 
 package com.vividsolutions.jcs.qa;
 
-import java.util.*;
-import com.vividsolutions.jts.geom.*;
-
-import com.vividsolutions.jump.util.CoordinateArrays;
-import com.vividsolutions.jts.precision.EnhancedPrecisionOp;
-import com.vividsolutions.jump.geom.*;
-import com.vividsolutions.jump.geom.GeometryFactoryUtil;
 import com.vividsolutions.jcs.algorithm.VertexHausdorffDistance;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.precision.EnhancedPrecisionOp;
+import com.vividsolutions.jcs.jump.geom.GeometryFactoryUtil;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OverlapBoundaryIndicators {
   private static GeometryFactory factory = new GeometryFactory();

@@ -31,10 +31,13 @@
  */
 package com.vividsolutions.jcs.qa;
 
+import com.vividsolutions.jcs.jump.geom.EnvelopeUtil;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.IndexedFeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.geom.*;
 
 /**
  * Finds Features which are within a given distance of another FeatureCollection

@@ -34,7 +34,7 @@
 
 package com.vividsolutions.jcs.conflate.boundarymatch;
 
-import com.vividsolutions.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import com.vividsolutions.jts.geom.LineSegment;
 import com.vividsolutions.jts.geom.Coordinate;
 

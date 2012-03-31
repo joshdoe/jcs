@@ -1,7 +1,7 @@
 package com.vividsolutions.jcs.edgemerge;
 
+import com.vividsolutions.jcs.jump.feature.Feature;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jcs.graph.*;
 
 public class MergeGraph

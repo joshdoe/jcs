@@ -37,8 +37,8 @@ package com.vividsolutions.jcs.conflate.polygonmatch;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
 
 /**
  * Composes several FeatureMatchers into one. Candidate features are whittled

@@ -10,8 +10,8 @@ import com.vividsolutions.jcs.graph.DirectedEdge;
 import com.vividsolutions.jcs.graph.DirectedEdgeStar;
 import com.vividsolutions.jcs.graph.Node;
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
 
 public class RoadNode extends Node {
 

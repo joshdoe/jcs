@@ -32,8 +32,13 @@
 
 package com.vividsolutions.jcs.conflate.coverage;
 
+import com.vividsolutions.jcs.jump.feature.FeatureUpdateRecorder;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
+import com.vividsolutions.jcs.jump.feature.FeatureUtil;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
 import java.util.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jcs.debug.Debug;
 

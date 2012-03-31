@@ -33,7 +33,7 @@ package com.vividsolutions.jcs.qa;
 
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.geom.LineSegmentUtil;
+import com.vividsolutions.jcs.jump.geom.LineSegmentUtil;
 import com.vividsolutions.jcs.conflate.boundarymatch.SegmentMatcher;
 
 public class MatchedShell

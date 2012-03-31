@@ -7,7 +7,7 @@ import com.vividsolutions.jts.util.Debug;
 import com.vividsolutions.jts.index.strtree.*;
 import com.vividsolutions.jcs.algorithm.linearreference.LengthSubstring;
 import com.vividsolutions.jcs.conflate.roads.model.*;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 
 /**
  * Finds RoadSegments in a source dataset which have no

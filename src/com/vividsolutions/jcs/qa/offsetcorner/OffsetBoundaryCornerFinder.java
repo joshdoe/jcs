@@ -31,10 +31,12 @@
  */
 package com.vividsolutions.jcs.qa.offsetcorner;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 import com.vividsolutions.jcs.qa.NearFeatureFinder;
 
 /**

@@ -12,7 +12,7 @@ import com.vividsolutions.jcs.conflate.roads.model.StateTransitionImpactAssessme
 import com.vividsolutions.jcs.conflate.roads.model.adjustedmatchconsistency.AdjustedMatchWithStandaloneEliminationConsistencyRule.StandaloneChainVisitor;
 import com.vividsolutions.jcs.jump.FUTURE_CollectionUtil;
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 
 public class AdjustedMatchWithStandaloneEliminationStateTransitionImpactAssessment
 		implements StateTransitionImpactAssessment {

@@ -31,8 +31,10 @@
  */
 package com.vividsolutions.jcs.qa.diff;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
 import java.util.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jts.geom.Geometry;
 
 public class MatchCollection

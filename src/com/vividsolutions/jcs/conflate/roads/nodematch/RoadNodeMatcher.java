@@ -158,7 +158,6 @@ public class RoadNodeMatcher {
         }
       }
     }
-DebugFeature.saveFeatures(MATCH, "Y:\\jcs\\testUnit\\roads\\nodeAllMatches.jml");
   }
 
 private static final String MATCH = "Match";

@@ -33,30 +33,20 @@
  */
 
 package com.vividsolutions.jcs.conflate.polygonmatch;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.IndexedFeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.feature.BasicFeature;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.BasicFeature;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
-import com.vividsolutions.jump.feature.FeatureDataset;
-import com.vividsolutions.jump.feature.FeatureSchema;
-import com.vividsolutions.jump.feature.IndexedFeatureCollection;
-import com.vividsolutions.jump.task.TaskMonitor;
-import com.vividsolutions.jump.util.CollectionMap;
-import com.vividsolutions.jump.util.CollectionUtil;
-import com.vividsolutions.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.util.CollectionMap;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
+import java.util.*;
 
 /**
  *  An FCMatchFinder wrapper that also treats pairs of adjacent target features
@@ -90,7 +80,7 @@ public class CombinatorialFCMatchFinder implements FCMatchFinder {
     this.matchFinder = new OneToOneFCMatchFinder(matchFinder);
   }
 
-  public Map match(IndexedFeatureCollection targetFC, IndexedFeatureCollection candidateFC,
+  public Map match(FeatureCollection targetFC, FeatureCollection candidateFC,
       TaskMonitor monitor) {
     monitor.allowCancellationRequests();
     FeatureCollection compositeTargetFC = new FeatureDataset(targetFC.getFeatureSchema());

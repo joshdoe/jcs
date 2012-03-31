@@ -2,7 +2,7 @@ package com.vividsolutions.jcs.conflate.roads.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import com.vividsolutions.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.Block;
 public class RoadsEventFirer {
     private List listeners = new ArrayList();
     public void fireRoadSegmentAdded(SourceRoadSegment roadSegment) {

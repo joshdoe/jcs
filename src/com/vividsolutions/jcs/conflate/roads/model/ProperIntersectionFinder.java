@@ -8,8 +8,8 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.IntersectionMatrix;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
 public class ProperIntersectionFinder {
 	private static boolean properlyIntersect(LineString a, LineString b) {
 		IntersectionMatrix matrix = a.relate(b);

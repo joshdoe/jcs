@@ -34,10 +34,10 @@
 
 package com.vividsolutions.jcs.conflate.boundarymatch;
 
-import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jts.util.Debug;
-import com.vividsolutions.jump.geom.LineSegmentUtil;
-import com.vividsolutions.jump.geom.*;
+import com.vividsolutions.jcs.geom.Angle;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.LineSegment;
+import com.vividsolutions.jcs.jump.geom.LineSegmentUtil;
 /**
  * A SegmentMatcher computes information about whether two boundary
  * LineSegments match

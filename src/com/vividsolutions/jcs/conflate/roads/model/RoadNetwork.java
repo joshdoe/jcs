@@ -1,17 +1,18 @@
 package com.vividsolutions.jcs.conflate.roads.model;
 
+import com.vividsolutions.jcs.conflate.roads.ConflationSession;
+import com.vividsolutions.jcs.jump.FUTURE_Assert;
+import com.vividsolutions.jts.geom.Envelope;
+import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.index.SpatialIndex;
+import com.vividsolutions.jts.util.Assert;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDataset;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
-import com.vividsolutions.jcs.conflate.roads.*;
-import com.vividsolutions.jcs.graph.Node;
-import com.vividsolutions.jcs.jump.FUTURE_Assert;
-import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jts.index.SpatialIndex;
-import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.util.CollectionUtil;
 
 /**
  * Models a Road Network to be conflated.

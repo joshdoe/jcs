@@ -38,9 +38,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 
 /**
  * Applies a FeatureMatcher to each item in a FeatureCollection

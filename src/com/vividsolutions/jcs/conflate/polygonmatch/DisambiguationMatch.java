@@ -6,8 +6,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 
 class DisambiguationMatch implements Comparable {
     private Feature target;

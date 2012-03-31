@@ -36,7 +36,7 @@ import java.util.*;
 //import com.vividsolutions.jts.algorithm.*;
 import com.vividsolutions.jts.geom.*;
 
-import com.vividsolutions.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
 
 /**
  * Polygonizes a set of LineStrings.

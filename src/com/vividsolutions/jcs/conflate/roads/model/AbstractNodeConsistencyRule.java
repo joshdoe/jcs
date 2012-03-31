@@ -1,20 +1,17 @@
 package com.vividsolutions.jcs.conflate.roads.model;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
-import com.vividsolutions.jcs.conflate.roads.model.ResultState.Description;
+import com.vividsolutions.jcs.geom.Angle;
 import com.vividsolutions.jcs.graph.DirectedEdge;
 import com.vividsolutions.jcs.jump.FUTURE_CollectionUtil;
 import com.vividsolutions.jcs.jump.FUTURE_StringUtil;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.geom.Angle;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public abstract class AbstractNodeConsistencyRule implements ConsistencyRule {
 

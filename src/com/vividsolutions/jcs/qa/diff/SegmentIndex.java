@@ -31,12 +31,12 @@
  */
 package com.vividsolutions.jcs.qa.diff;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.index.*;
 import com.vividsolutions.jts.index.quadtree.Quadtree;
-import com.vividsolutions.jump.feature.*;
 import java.util.*;
-import com.vividsolutions.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
 import com.vividsolutions.jcs.feature.FeatureCollectionGeometryIterator;
 
 public class SegmentIndex {

@@ -6,7 +6,7 @@ import com.vividsolutions.jcs.conflate.roads.ErrorMessages;
 import com.vividsolutions.jcs.conflate.roads.model.*;
 import com.vividsolutions.jcs.conflate.roads.model.ResultState.Description;
 import com.vividsolutions.jcs.jump.FUTURE_Block;
-import com.vividsolutions.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.Block;
 
 public class SourceMatchConsistencyRule implements ConsistencyRule {
 

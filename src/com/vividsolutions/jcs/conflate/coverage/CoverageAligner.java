@@ -33,12 +33,14 @@
 
 package com.vividsolutions.jcs.conflate.coverage;
 
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.IndexedFeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.feature.*;
 
 import com.vividsolutions.jcs.conflate.boundarymatch.*;
-import com.vividsolutions.jump.task.*;
 
 /**
  * Aligns one coverage to another

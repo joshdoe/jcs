@@ -35,7 +35,7 @@ package com.vividsolutions.jcs.qa;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.algorithm.PointLocator;
-import com.vividsolutions.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
 
 /**
  * Creates overlap indicators for two geometries by finding all segments which

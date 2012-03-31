@@ -1,22 +1,17 @@
 package com.vividsolutions.jcs.conflate.roads.model.adjustedmatchconsistency;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
-import java.util.*;
-
 import com.vividsolutions.jcs.conflate.roads.ConflationSession;
-import com.vividsolutions.jcs.conflate.roads.model.*;
 import com.vividsolutions.jcs.conflate.roads.model.ResultState.Description;
+import com.vividsolutions.jcs.conflate.roads.model.*;
 import com.vividsolutions.jcs.conflate.roads.model.sourcematchconsistency.SourceMatchConsistencyRule;
 import com.vividsolutions.jcs.jump.FUTURE_Block;
-import com.vividsolutions.jcs.jump.FUTURE_CollectionUtil;
-import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.index.SpatialIndex;
 import com.vividsolutions.jts.index.strtree.STRtree;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
-import com.vividsolutions.jump.util.FileUtil;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.*;
 
 public class AdjustedMatchConsistencyRule implements ConsistencyRule,
 		Optimizable {

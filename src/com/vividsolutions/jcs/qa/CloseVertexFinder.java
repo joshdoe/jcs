@@ -32,11 +32,14 @@
 
 package com.vividsolutions.jcs.qa;
 
+import com.vividsolutions.jcs.jump.geom.EnvelopeUtil;
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.IndexedFeatureCollection;
+import com.vividsolutions.jcs.jump.feature.FeatureDatasetFactory;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
 
-import com.vividsolutions.jump.feature.*;
-import com.vividsolutions.jump.geom.*;
-import com.vividsolutions.jump.task.*;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.util.*;
 

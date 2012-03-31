@@ -31,9 +31,10 @@
  */
 package com.vividsolutions.jcs.feature;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.Iterator;
 
-import com.vividsolutions.jump.feature.*;
 
 public class FeatureCollectionGeometryIterator
     implements Iterator

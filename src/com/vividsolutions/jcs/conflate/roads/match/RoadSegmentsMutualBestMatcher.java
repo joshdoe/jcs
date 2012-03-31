@@ -1,11 +1,11 @@
 package com.vividsolutions.jcs.conflate.roads.match;
 
+import com.vividsolutions.jcs.jump.geom.EnvelopeUtil;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.index.*;
 import com.vividsolutions.jts.index.strtree.*;
 import com.vividsolutions.jcs.conflate.roads.model.*;
-import com.vividsolutions.jump.geom.*;
 import com.vividsolutions.jcs.algorithm.*;
 
 public class RoadSegmentsMutualBestMatcher {

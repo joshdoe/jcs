@@ -34,11 +34,13 @@
 
 package com.vividsolutions.jcs.qa;
 
-import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jts.geom.LineSegment;
-import com.vividsolutions.jump.util.Counter;
-import com.vividsolutions.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.util.CoordinateArrays;
+import com.vividsolutions.jcs.jump.geom.Counter;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class UnmatchedEdgeExtracter {
 

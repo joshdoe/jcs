@@ -10,10 +10,10 @@ import com.vividsolutions.jcs.conflate.roads.model.SourceRoadSegment;
 import com.vividsolutions.jcs.conflate.roads.model.SourceState;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.geom.Angle;
-import com.vividsolutions.jump.geom.CoordUtil;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.geom.Angle;
+import com.vividsolutions.jcs.jump.geom.CoordUtil;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
 
 public class MatchingApparentNodesFinder {
 	

@@ -4,7 +4,7 @@ import java.util.Collection;
 import com.vividsolutions.jcs.conflate.roads.ErrorMessages;
 import com.vividsolutions.jcs.conflate.roads.model.ResultState.Description;
 import com.vividsolutions.jcs.jump.FUTURE_CollectionUtil;
-import com.vividsolutions.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.Block;
 public class ResultStateRules {
 	private static ResultStateRules instance = new ResultStateRules();
 	public static final String PROPERLY_INTERSECTING_ROAD_SEGMENT_KEY = ResultStateRules.class + " - PROPERLY INTERSECTING ROAD SEGMENT";

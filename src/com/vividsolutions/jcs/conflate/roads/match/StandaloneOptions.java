@@ -3,7 +3,7 @@ package com.vividsolutions.jcs.conflate.roads.match;
 import java.io.Serializable;
 
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.util.StringUtil;
+import com.vividsolutions.jcs.jump.util.StringUtil;
 
 //Things to keep up to date: #clone and .java2xml
 //[Jon Aquino 2004-03-03]

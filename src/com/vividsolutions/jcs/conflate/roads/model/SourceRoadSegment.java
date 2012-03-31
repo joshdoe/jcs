@@ -1,22 +1,20 @@
 package com.vividsolutions.jcs.conflate.roads.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-
-import com.vividsolutions.jcs.conflate.roads.match.*;
-import com.vividsolutions.jcs.conflate.roads.model.adjustedmatchconsistency.AdjustedMatchConsistencyRule;
+import com.vividsolutions.jcs.conflate.roads.match.CandidateMatches;
+import com.vividsolutions.jcs.conflate.roads.match.MatchDistance;
 import com.vividsolutions.jcs.conflate.roads.model.adjustedmatchconsistency.ApparentNode;
 import com.vividsolutions.jcs.conflate.roads.model.adjustedmatchconsistency.MatchingApparentNodesFinder;
+import com.vividsolutions.jcs.geom.Angle;
 import com.vividsolutions.jcs.geom.LineStringUtil;
 import com.vividsolutions.jcs.jump.FUTURE_LineString;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.geom.Angle;
-import com.vividsolutions.jump.util.Block;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.util.Block;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 
 public class SourceRoadSegment extends RoadSegment {
 	private double adjustmentSize = 0;

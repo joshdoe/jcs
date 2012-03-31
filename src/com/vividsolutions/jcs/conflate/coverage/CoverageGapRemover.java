@@ -34,12 +34,13 @@
 
 package com.vividsolutions.jcs.conflate.coverage;
 
+import com.vividsolutions.jcs.jump.task.TaskMonitor;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jcs.qa.InternalMatchedSegmentFinder;
 import com.vividsolutions.jcs.conflate.boundarymatch.*;
-import com.vividsolutions.jump.task.*;
 /**
  * Removes gaps and overlaps from FeatureDatasets that
  * are intended to have coverage topology.

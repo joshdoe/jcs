@@ -34,11 +34,12 @@
 
 package com.vividsolutions.jcs.conflate.boundarymatch;
 
-import java.util.*;
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jump.geom.*;
-
+import com.vividsolutions.jts.geom.CoordinateList;
 import com.vividsolutions.jts.geom.LineSegment;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Contains the information about the linesegments (or subsegments)

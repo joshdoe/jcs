@@ -1,12 +1,15 @@
 package com.vividsolutions.jcs.conflate.roads.model;
 
-import com.vividsolutions.jcs.conflate.roads.ErrorMessages;
-import com.vividsolutions.jcs.jump.FUTURE_StringUtil;
-
 import bsh.EvalError;
 import bsh.Interpreter;
 import bsh.TargetError;
+import com.vividsolutions.jcs.conflate.roads.ErrorMessages;
+import com.vividsolutions.jcs.jump.FUTURE_StringUtil;
 
+/**
+ * Allows user to specify BeanShell script to determine which @SourceRoadSegment
+ * to prefer.
+ */
 public class ScriptedPrecedenceRuleEngine implements PrecedenceRuleEngine {
 
 	//Make Interpreter transient -- this somehow fixes the following

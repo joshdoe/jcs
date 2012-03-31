@@ -2,7 +2,7 @@ package com.vividsolutions.jcs.conflate.roads.model;
 
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.Feature;
 
 
 public class SplitRoadSegment extends SourceRoadSegment {

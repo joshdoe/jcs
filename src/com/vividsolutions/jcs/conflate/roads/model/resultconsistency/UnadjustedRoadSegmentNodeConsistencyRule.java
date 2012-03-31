@@ -12,8 +12,8 @@ import com.vividsolutions.jcs.conflate.roads.model.RoadNode;
 import com.vividsolutions.jcs.conflate.roads.model.SourceRoadSegment;
 import com.vividsolutions.jcs.conflate.roads.model.ResultState.Description;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.util.Block;
-import com.vividsolutions.jump.util.CollectionUtil;
+import com.vividsolutions.jcs.jump.util.Block;
+import com.vividsolutions.jcs.jump.util.CollectionUtil;
 
 public class UnadjustedRoadSegmentNodeConsistencyRule extends
 		AbstractNodeConsistencyRule {

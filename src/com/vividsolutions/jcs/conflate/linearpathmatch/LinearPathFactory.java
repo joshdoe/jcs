@@ -1,7 +1,8 @@
 package com.vividsolutions.jcs.conflate.linearpathmatch;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import com.vividsolutions.jcs.conflate.linearpathmatch.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jts.geom.*;
 import java.util.Iterator;
 

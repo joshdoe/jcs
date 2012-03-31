@@ -34,8 +34,8 @@
 
 package com.vividsolutions.jcs.conflate.polygonmatch;
 
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
 
 /**
  * An algorithm for finding potential matches for a feature from a collection

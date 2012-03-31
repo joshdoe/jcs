@@ -1,22 +1,17 @@
 package com.vividsolutions.jcs.conflate.roads.model;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
 import com.vividsolutions.jcs.jump.FUTURE_AbstractBasicFeature;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.util.Assert;
-import com.vividsolutions.jump.feature.AttributeType;
-import com.vividsolutions.jump.feature.Feature;
-import com.vividsolutions.jump.feature.FeatureSchema;
-import com.vividsolutions.jump.feature.FeatureUtil;
-import com.vividsolutions.jump.util.LangUtil;
+import com.vividsolutions.jcs.jump.feature.AttributeType;
+import com.vividsolutions.jcs.jump.feature.Feature;
+import com.vividsolutions.jcs.jump.feature.FeatureSchema;
+import com.vividsolutions.jcs.jump.feature.FeatureUtil;
+import com.vividsolutions.jcs.jump.util.LangUtil;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Attributes are the same as those of the original Feature, with the exception

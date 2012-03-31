@@ -31,10 +31,11 @@
  */
 package com.vividsolutions.jcs.conflate.coverage.snap;
 
+import com.vividsolutions.jcs.jump.feature.FeatureCollection;
+import com.vividsolutions.jcs.jump.feature.Feature;
 import java.util.*;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jcs.geom.*;
-import com.vividsolutions.jump.feature.*;
 import com.vividsolutions.jcs.feature.*;
 
 public class SlowPointIndex {
